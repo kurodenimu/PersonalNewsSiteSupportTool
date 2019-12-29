@@ -75,6 +75,7 @@ namespace PersonalNewsSiteSupportTool
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
+            e.Cancel = true;
             this.Hide();
         }
 
@@ -89,7 +90,8 @@ namespace PersonalNewsSiteSupportTool
                 {
                     this.Show();
                     this.WindowState = WindowState.Normal;
-                    textbox1.Text = cbText;
+                    textbox1.Text = cbText + "\r\n";
+                    combobox1.SelectedIndex = -1;
                 }
             }
         }
