@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PersonalNewsSiteSupportTool")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright ©  2019 kurodenimu")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
