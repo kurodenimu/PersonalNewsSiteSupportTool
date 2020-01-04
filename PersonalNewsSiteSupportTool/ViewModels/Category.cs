@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonalNewsSiteSupportTool
+namespace PersonalNewsSiteSupportTool.ViewModels
 {
     public class Category
     {

@@ -13,7 +13,7 @@ namespace PersonalNewsSiteSupportTool
         private NotifyIconWrapper notifyIcon;
 
         /// <summary>
-        /// System.Windows.Application.Startup イベント を発生させます。
+        /// System.Windows.Application.Startupイベント発生時の処理。
         /// </summary>
         /// <param name="e">イベントデータ を格納している StartupEventArgs</param>
         protected override void OnStartup(StartupEventArgs e)
@@ -24,7 +24,7 @@ namespace PersonalNewsSiteSupportTool
         }
 
         /// <summary>
-        /// System.Windows.Application.Exit イベント を発生させます。
+        /// System.Windows.Application.Exit イベント 発生時の処理。
         /// </summary>
         /// <param name="e">イベントデータ を格納している ExitEventArgs</param>
         protected override void OnExit(ExitEventArgs e)

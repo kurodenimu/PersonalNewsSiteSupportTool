@@ -34,6 +34,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // notifyIcon1
             // 
@@ -55,6 +56,7 @@
             this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem_Exit.Text = "終了";
             this.contextMenuStrip1.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
 
