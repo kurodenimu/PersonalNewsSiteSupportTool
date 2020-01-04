@@ -1,0 +1,33 @@
+﻿<Window x:Class="PersonalNewsSiteSupportTool.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonalNewsSiteSupportTool"
+        xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
+        xmlns:vm="clr-namespace:PersonalNewsSiteSupportTool.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Visibility="Visible" WindowState="Minimized">
+    <Grid HorizontalAlignment="Left" Height="382" Margin="23,10,0,0" VerticalAlignment="Top" Width="738">
+        <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="227" Margin="10,84,0,0" TextWrapping="Wrap" Text="{Binding NewsComment}" 
+                 VerticalAlignment="Top" Width="708" AcceptsReturn="True"/>
+        <ComboBox x:Name="combobox1" ItemsSource="{Binding Categories}"  SelectedItem="{Binding Category}" 
+                  DisplayMemberPath="Name" 
+                  SelectedValuePath="Id" SelectedValue="{Binding CategoryId}"
+                  HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="120">
+        </ComboBox>
+        <Button Content="完了" HorizontalAlignment="Left" Margin="619,352,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CompleteButtonClick}"/>
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <b:WindowClosingAction />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.DataContext>
+        <vm:MainWindowModel/>
+    </Window.DataContext>
+</Window>
