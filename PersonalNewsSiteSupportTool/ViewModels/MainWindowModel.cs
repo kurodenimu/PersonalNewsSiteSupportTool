@@ -61,7 +61,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
             else
             {
-                File.AppendAllText(savePath + "news_" + CategoryId + ".txt", NewsComment + "\r\n\r\n");
+                File.AppendAllText($"{savePath}news_{CategoryId}.txt", "{NewsComment}\r\n\r\n");
                 MainWindow.instance.Hide();
             }
         }
