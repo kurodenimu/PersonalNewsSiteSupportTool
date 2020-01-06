@@ -16,7 +16,6 @@ namespace PersonalNewsSiteSupportTool.Views
         {
             InitializeComponent();
             instance = this;
-            this.DataContext = new MainWindowModel();
         }
     }
 }
