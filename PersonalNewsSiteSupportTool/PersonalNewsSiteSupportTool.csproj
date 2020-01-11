@@ -74,6 +74,7 @@
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\ClipBoardWatcher.cs" />
     <Compile Include="Behaviors\CommandBase.cs" />
+    <Compile Include="ViewModels\InformationSource.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Behaviors\WindowClosingAction.cs" />

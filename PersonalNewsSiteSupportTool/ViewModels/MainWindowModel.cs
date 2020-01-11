@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 using System.Windows.Interop;
@@ -19,15 +20,21 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public ICommand LoadedCommand { get; private set; }
 
-        public ICommand CompleteButtonClick { get; set; }
-
-        public TriggerAction<Window> WindowClosingAction { get; private set; }
+        public ICommand CompleteButtonClick { get; private set; }
 
         public ObservableCollection<Category> Categories { get; set; }
+
+        public ObservableCollection<InformationSource> InformationSources { get; set; }
 
         ClipboardWatcher clipboardWatcher = null;
 
         private String categoryId;
+
+        private String newsUrl;
+
+        private String via;
+
+        private bool isViaEditabled;
 
         private String newsComment;
 
@@ -61,7 +68,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
             else
             {
-                File.AppendAllText($"{savePath}news_{CategoryId}.txt", "{NewsComment}\r\n\r\n");
+                String viaText = "";
+                if (Via != null & !"".Equals(Via))
+                {
+                    viaText = $"（via：{Via}）";
+                }
+                File.AppendAllText($"{savePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}\r\n{NewsComment}\r\n\r\n");
                 MainWindow.instance.Hide();
             }
         }
@@ -77,10 +89,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 {
                     mainWindow.Show();
                     mainWindow.WindowState = WindowState.Normal;
-                    newsComment = cbText + "\r\n";
-                    this.NotifyPropertyChanged("NewsComment");
-                    categoryId = null;
-                    this.NotifyPropertyChanged("CategoryId");
+                    CategoryId = null;
+                    NewsUrl = cbText;
+                    Via = "";
+                    NewsComment = "";
                 }
             }
         }
@@ -94,6 +106,47 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 {
                     categoryId = value;
                     this.NotifyPropertyChanged("CategoryId");
+                }
+            }
+        }
+
+        public String NewsUrl
+        {
+            get => newsUrl;
+            set
+            {
+                if(newsUrl != value)
+                {
+                    newsUrl = value;
+                    this.NotifyPropertyChanged("NewsUrl");
+                }
+            }
+        }
+
+        public String Via
+        {
+            get => via;
+            set
+            {
+                if (via != value)
+                {
+                    via = value;
+                    this.NotifyPropertyChanged("Via");
+
+                    IsViaEditabled = via == null | "".Equals(via);
+                }
+            }
+        }
+
+        public bool IsViaEditabled
+        {
+            get => isViaEditabled;
+            set
+            {
+                if (isViaEditabled != value)
+                {
+                    isViaEditabled = value;
+                    this.NotifyPropertyChanged("isViaEditabled");
                 }
             }
         }
@@ -113,13 +166,20 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void ConfigLoad()
         {
-            // TODO 設定を読み込んだ時のメソッド。現在は固定値。
-            this.Categories = new ObservableCollection<Category>() {
+            // TODO 設定を読み込む時のメソッド。現在は固定値。
+            this.Categories = new ObservableCollection<Category>() 
+            {
                 new Category() { Name = "IT", Id = "IT"},
                 new Category() { Name = "その他", Id  = "その他"},
                 new Category() { Name = "old", Id = "old"}
             };
             this.NotifyPropertyChanged("Categories");
+            this.InformationSources = new ObservableCollection<InformationSource>()
+            {
+                new InformationSource() { Name = "自分で入力", Data=""},
+                new InformationSource() { Name = "はてなブックマーク", Data = "はてなブックマーク"}
+            };
+            this.NotifyPropertyChanged("InformationSources");
             savePath = @"C:\Users\pyonko\Dropbox\";
         }
     }
