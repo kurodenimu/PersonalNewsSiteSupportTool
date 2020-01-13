@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotifyIconWrapper));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Cat = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -46,14 +47,22 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Cat,
             this.toolStripMenuItem_Exit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(99, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(133, 48);
+            // 
+            // toolStripMenuItem_Cat
+            // 
+            this.toolStripMenuItem_Cat.Name = "toolStripMenuItem_Cat";
+            this.toolStripMenuItem_Cat.Size = new System.Drawing.Size(132, 22);
+            this.toolStripMenuItem_Cat.Text = "ファイル結合";
+            this.toolStripMenuItem_Cat.Click += new System.EventHandler(this.toolStripMenuItem_Cat_Click);
             // 
             // toolStripMenuItem_Exit
             // 
             this.toolStripMenuItem_Exit.Name = "toolStripMenuItem_Exit";
-            this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(132, 22);
             this.toolStripMenuItem_Exit.Text = "終了";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -65,5 +74,6 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Exit;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Cat;
     }
 }

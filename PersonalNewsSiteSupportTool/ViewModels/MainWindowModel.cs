@@ -1,6 +1,8 @@
 ﻿using PersonalNewsSiteSupportTool.Behaviors;
+using PersonalNewsSiteSupportTool.Models;
 using PersonalNewsSiteSupportTool.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -39,10 +41,6 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private String newsComment;
 
-        private String savePath = "";
-
-        private String newLine = "\r\n";
-
         private  Regex newLineRegex = new Regex("\r\n|\r|\n");
 
         public MainWindowModel()
@@ -67,19 +65,22 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         private void CompleteAction()
         {
 
-            if (CategoryId == null | "".Equals(CategoryId))
+            if (CategoryId == null | "".Equals(CategoryId, StringComparison.Ordinal))
             {
                 MessageBox.Show("カテゴリが選択されていません。");
             }
             else
             {
                 String viaText = "";
-                if (Via != null & !"".Equals(Via))
+                if (Via != null & !"".Equals(Via, StringComparison.Ordinal))
                 {
                     viaText = $"（via：{Via}）";
                 }
-                
-                File.AppendAllText($"{savePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
+
+                Config config = Config.GetInsrance();
+                String newLine = config.NewLine;
+
+                File.AppendAllText($"{config.SavePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
                 MainWindow.instance.Hide();
             }
         }
@@ -91,7 +92,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             if (Clipboard.ContainsText())
             {
                 String cbText = Clipboard.GetText();
-                if (cbText.StartsWith("***["))
+                if (cbText.StartsWith("***[", StringComparison.Ordinal))
                 {
                     mainWindow.Show();
                     mainWindow.WindowState = WindowState.Normal;
@@ -111,7 +112,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 if (categoryId != value)
                 {
                     categoryId = value;
-                    this.NotifyPropertyChanged("CategoryId");
+                    this.NotifyPropertyChanged(nameof(CategoryId));
                 }
             }
         }
@@ -124,7 +125,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 if(newsUrl != value)
                 {
                     newsUrl = value;
-                    this.NotifyPropertyChanged("NewsUrl");
+                    this.NotifyPropertyChanged(nameof(NewsUrl));
                 }
             }
         }
@@ -137,9 +138,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 if (via != value)
                 {
                     via = value;
-                    this.NotifyPropertyChanged("Via");
+                    this.NotifyPropertyChanged(nameof(Via));
 
-                    IsViaEditabled = via == null | "".Equals(via);
+                    IsViaEditabled = via == null | "".Equals(via, StringComparison.Ordinal);
                 }
             }
         }
@@ -152,7 +153,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 if (isViaEditabled != value)
                 {
                     isViaEditabled = value;
-                    this.NotifyPropertyChanged("isViaEditabled");
+                    this.NotifyPropertyChanged(nameof(IsViaEditabled));
                 }
             }
         }
@@ -165,7 +166,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 if (newsComment != value)
                 {
                     newsComment = value;
-                    this.NotifyPropertyChanged("NewsComment");
+                    this.NotifyPropertyChanged(nameof(NewsComment));
                 }
             }
         }
@@ -173,21 +174,25 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         private void ConfigLoad()
         {
             // TODO 設定を読み込む時のメソッド。現在は固定値。
-            this.Categories = new ObservableCollection<Category>() 
+            // 設定クラス再読込
+            Config config = Config.GetInsrance();
+            config.ReloadConfig();
+            
+            this.Categories = new ObservableCollection<Category>();
+            // カテゴリ設定
+            foreach(var kvp in config.Categories)
             {
-                new Category() { Name = "IT", Id = "IT"},
-                new Category() { Name = "その他", Id  = "その他"},
-                new Category() { Name = "old", Id = "old"}
-            };
-            this.NotifyPropertyChanged("Categories");
+                this.Categories.Add(new Category() { Name = kvp.Value, Id = kvp.Key });
+            }
+            this.NotifyPropertyChanged(nameof(Categories));
+
+            // 情報元設定
             this.InformationSources = new ObservableCollection<InformationSource>()
             {
                 new InformationSource() { Name = "自分で入力", Data=""},
                 new InformationSource() { Name = "はてなブックマーク", Data = "はてなブックマーク"}
             };
-            this.NotifyPropertyChanged("InformationSources");
-            savePath = @"C:\Users\pyonko\Dropbox\";
-            newLine = "\n";
+            this.NotifyPropertyChanged(nameof(InformationSources));
         }
     }
 }
