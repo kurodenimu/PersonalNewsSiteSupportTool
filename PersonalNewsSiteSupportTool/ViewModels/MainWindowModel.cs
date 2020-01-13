@@ -3,6 +3,7 @@ using PersonalNewsSiteSupportTool.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,6 +41,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private String savePath = "";
 
+        private String newLine = "\r\n";
+
+        private  Regex newLineRegex = new Regex("\r\n|\r|\n");
+
         public MainWindowModel()
         {
             LoadedCommand = new CommandBase(LoadedAction);
@@ -73,7 +78,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 {
                     viaText = $"（via：{Via}）";
                 }
-                File.AppendAllText($"{savePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}\r\n{NewsComment}\r\n\r\n");
+                
+                File.AppendAllText($"{savePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
                 MainWindow.instance.Hide();
             }
         }
@@ -181,6 +187,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             };
             this.NotifyPropertyChanged("InformationSources");
             savePath = @"C:\Users\pyonko\Dropbox\";
+            newLine = "\n";
         }
     }
 }
