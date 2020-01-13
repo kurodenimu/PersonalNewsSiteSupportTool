@@ -6,7 +6,5 @@ namespace PersonalNewsSiteSupportTool.ViewModels
     {
         public String Name { get; set; }
         public String Id { get; set; }
-
-
     }
 }

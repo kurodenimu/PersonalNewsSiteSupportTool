@@ -1,7 +1,9 @@
 ﻿namespace PersonalNewsSiteSupportTool
 {
+    using PersonalNewsSiteSupportTool.Models;
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Windows.Forms;
     using Application = System.Windows.Application;
 
@@ -26,6 +28,10 @@
         /// <param name="container">コンテナ</param>
         public NotifyIconWrapper(IContainer container)
         {
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container), "タスクトレイアイコンの初期化に失敗しました。");
+            }
             container.Add(this);
 
             this.InitializeComponent();
@@ -40,6 +46,23 @@
         {
             // 現在のアプリケーションを終了
             Application.Current.Shutdown();
+        }
+
+        private void toolStripMenuItem_Cat_Click(object sender, EventArgs e)
+        {
+            Config config = Config.GetInsrance();
+            String savePath = config.SavePath;
+            String newLine = config.NewLine;
+            string readText = "";
+            foreach(var kvp in config.Categories)
+            {
+                String fullPath = $"{savePath}news_{kvp.Key}.txt";
+                if (File.Exists(fullPath))
+                {
+                    readText = $"{readText}**{kvp.Value}{newLine}{newLine}{File.ReadAllText(fullPath)}{newLine}";
+                }
+            }
+            File.AppendAllText($"{savePath}news.txt", readText);
         }
     }
 }
