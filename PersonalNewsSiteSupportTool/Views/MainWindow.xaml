@@ -8,7 +8,7 @@
         xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
         xmlns:vm="clr-namespace:PersonalNewsSiteSupportTool.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="506.418" Width="800" Visibility="Visible" WindowState="Minimized">
+        Title="個人ニュースサイト支援ツール" Height="506.418" Width="800" Visibility="Visible" WindowState="Minimized">
     <Grid HorizontalAlignment="Left" Height="459" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
         <ComboBox x:Name="combobox1" ItemsSource="{Binding Categories}"  SelectedItem="{Binding Category}" 
                   DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding CategoryId}"
