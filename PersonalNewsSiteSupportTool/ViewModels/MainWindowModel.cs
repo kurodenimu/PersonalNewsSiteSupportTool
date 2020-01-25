@@ -96,7 +96,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     {
                         mainWindow.WindowState = WindowState.Normal;
                         mainWindow.Activate();
-                        if (!ShowConfirmDialog("現在の表示内容を消しても構いませんか。"))
+                        if (!ShowConfirmMessage("現在の表示内容を消しても構いませんか。"))
                         {
                             return;
                         }
