@@ -1,13 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Livet;
+using Livet.Messaging;
+using System.Windows;
 
 namespace PersonalNewsSiteSupportTool.ViewModels
 {
-    class ViewModelBase : INotifyPropertyChanged
+    class ViewModelBase : ViewModel
     {
-        /// <summary>
-        ///  プロパティ変更イベント
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// プロパティ変更イベント時の処理
@@ -15,7 +13,23 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            RaisePropertyChanged(propertyName);
+        }
+
+        public void ShowInfoMessageBox(string message, string title = "情報")
+        {
+            Messenger.Raise(new InformationMessage(message, title, MessageBoxImage.Information, "Information"));
+        }
+        public void ShowErrorDialog(string message, string title = "エラー")
+        {
+            Messenger.Raise(new InformationMessage(message, title, MessageBoxImage.Error, "Error"));
+        }
+        public bool ShowConfirmDialog(string message, string title = "確認")
+        {
+            var confirmationMessage = new ConfirmationMessage(message, title, MessageBoxImage.Question, MessageBoxButton.OKCancel, "Confirm");
+            Messenger.Raise(confirmationMessage);
+
+            return confirmationMessage.Response ?? false;
         }
     }
 }

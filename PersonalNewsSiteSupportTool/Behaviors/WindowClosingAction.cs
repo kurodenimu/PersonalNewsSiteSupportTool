@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Xaml.Behaviors;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Interactivity;
 
 namespace PersonalNewsSiteSupportTool.Behaviors
 {

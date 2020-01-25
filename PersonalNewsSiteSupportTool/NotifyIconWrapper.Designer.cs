@@ -32,7 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotifyIconWrapper));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_Test = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Cat = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -47,10 +49,18 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Test,
             this.toolStripMenuItem_Cat,
+            this.toolStripSeparator1,
             this.toolStripMenuItem_Exit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(133, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(133, 76);
+            // 
+            // toolStripMenuItem_Test
+            // 
+            this.toolStripMenuItem_Test.Name = "toolStripMenuItem_Test";
+            this.toolStripMenuItem_Test.Size = new System.Drawing.Size(132, 22);
+            this.toolStripMenuItem_Test.Text = "Test";
             // 
             // toolStripMenuItem_Cat
             // 
@@ -58,6 +68,11 @@
             this.toolStripMenuItem_Cat.Size = new System.Drawing.Size(132, 22);
             this.toolStripMenuItem_Cat.Text = "ファイル結合";
             this.toolStripMenuItem_Cat.Click += new System.EventHandler(this.toolStripMenuItem_Cat_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(129, 6);
             // 
             // toolStripMenuItem_Exit
             // 
@@ -75,5 +90,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Exit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Cat;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Test;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
