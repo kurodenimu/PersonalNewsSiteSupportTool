@@ -16,15 +16,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             RaisePropertyChanged(propertyName);
         }
 
-        public void ShowInfoMessageBox(string message, string title = "情報")
+        public void ShowInfoMessage(string message, string title = "情報")
         {
             Messenger.Raise(new InformationMessage(message, title, MessageBoxImage.Information, "Information"));
         }
-        public void ShowErrorDialog(string message, string title = "エラー")
+        public void ShowErrorMessage(string message, string title = "エラー")
         {
             Messenger.Raise(new InformationMessage(message, title, MessageBoxImage.Error, "Error"));
         }
-        public bool ShowConfirmDialog(string message, string title = "確認")
+        public bool ShowConfirmMessage(string message, string title = "確認")
         {
             var confirmationMessage = new ConfirmationMessage(message, title, MessageBoxImage.Question, MessageBoxButton.OKCancel, "Confirm");
             Messenger.Raise(confirmationMessage);
