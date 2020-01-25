@@ -54,7 +54,7 @@
             String savePath = config.SavePath;
             String newLine = config.NewLine;
             string readText = "";
-            foreach(var kvp in config.Categories)
+            foreach (var kvp in config.Categories)
             {
                 String fullPath = $"{savePath}news_{kvp.Key}.txt";
                 if (File.Exists(fullPath))
