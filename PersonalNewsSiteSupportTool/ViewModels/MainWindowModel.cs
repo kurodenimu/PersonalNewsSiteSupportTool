@@ -1,7 +1,6 @@
 ﻿using Livet.Commands;
 using PersonalNewsSiteSupportTool.Behaviors;
 using PersonalNewsSiteSupportTool.Models;
-using PersonalNewsSiteSupportTool.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -49,7 +48,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void LoadedAction()
         {
-            var mainWindow = MainWindow.instance;
+            var mainWindow = Application.Current.MainWindow;
             mainWindow.Hide();
             mainWindow.ShowInTaskbar = true;
             //Clipboardwatcher作成
@@ -80,20 +79,20 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 String newLine = config.NewLine;
 
                 File.AppendAllText($"{config.SavePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
-                MainWindow.instance.Hide();
+                Application.Current.MainWindow.Hide();
             }
         }
 
 
-        private Livet.Commands.ViewModelCommand _ExitCommand;
+        private ViewModelCommand _ExitCommand;
 
-        public Livet.Commands.ViewModelCommand ExitCommand
+        public ViewModelCommand ExitCommand
         {
             get
             {
                 if (_ExitCommand == null)
                 {
-                    _ExitCommand = new Livet.Commands.ViewModelCommand(Exit, CanExit);
+                    _ExitCommand = new ViewModelCommand(Exit, CanExit);
                 }
                 return _ExitCommand;
             }
@@ -106,7 +105,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void Exit()
         {
-            Application.Current.Shutdown();
+            var mainWindow = Application.Current.MainWindow;
+            mainWindow.Activate();
+            if (ShowConfirmMessage("終了しますか"))
+            {
+                Application.Current.Shutdown();
+            }
         }
 
 
@@ -149,7 +153,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void ClipboardWatcher_DrawClipboard(object sender, EventArgs e)
         {
-            MainWindow mainWindow = MainWindow.instance;
+            var mainWindow = Application.Current.MainWindow;
 
             if (Clipboard.ContainsText())
             {
