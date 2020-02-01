@@ -7,12 +7,10 @@ namespace PersonalNewsSiteSupportTool.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow instance = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            instance = this;
         }
     }
 }
