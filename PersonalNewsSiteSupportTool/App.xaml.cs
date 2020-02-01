@@ -7,10 +7,6 @@ namespace PersonalNewsSiteSupportTool
     /// </summary>
     public partial class App : Application
     {
-        /// <summary>
-        /// タスクトレイに表示するアイコン
-        /// </summary>
-        private NotifyIconWrapper notifyIcon;
 
         /// <summary>
         /// System.Windows.Application.Startupイベント発生時の処理。
@@ -20,7 +16,6 @@ namespace PersonalNewsSiteSupportTool
         {
             base.OnStartup(e);
             this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-            this.notifyIcon = new NotifyIconWrapper();
         }
 
         /// <summary>
@@ -30,7 +25,6 @@ namespace PersonalNewsSiteSupportTool
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-            this.notifyIcon.Dispose();
         }
     }
 }
