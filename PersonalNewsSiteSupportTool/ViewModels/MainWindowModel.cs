@@ -1,4 +1,5 @@
-﻿using PersonalNewsSiteSupportTool.Behaviors;
+﻿using Livet.Commands;
+using PersonalNewsSiteSupportTool.Behaviors;
 using PersonalNewsSiteSupportTool.Models;
 using PersonalNewsSiteSupportTool.Views;
 using System;
@@ -48,8 +49,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void LoadedAction()
         {
-            MainWindow mainWindow = MainWindow.instance;
+            var mainWindow = MainWindow.instance;
             mainWindow.Hide();
+            mainWindow.ShowInTaskbar = true;
             //Clipboardwatcher作成
             //ウィンドウハンドルを渡す
             clipboardWatcher = new ClipboardWatcher(new WindowInteropHelper(mainWindow).Handle);
@@ -81,6 +83,69 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 MainWindow.instance.Hide();
             }
         }
+
+
+        private Livet.Commands.ViewModelCommand _ExitCommand;
+
+        public Livet.Commands.ViewModelCommand ExitCommand
+        {
+            get
+            {
+                if (_ExitCommand == null)
+                {
+                    _ExitCommand = new Livet.Commands.ViewModelCommand(Exit, CanExit);
+                }
+                return _ExitCommand;
+            }
+        }
+
+        public bool CanExit()
+        {
+            return true;
+        }
+
+        public void Exit()
+        {
+            Application.Current.Shutdown();
+        }
+
+
+        private ViewModelCommand _CatCommand;
+
+        public ViewModelCommand CatCommand
+        {
+            get
+            {
+                if (_CatCommand == null)
+                {
+                    _CatCommand = new ViewModelCommand(Cat, CanCat);
+                }
+                return _CatCommand;
+            }
+        }
+
+        public bool CanCat()
+        {
+            return true;
+        }
+
+        public void Cat()
+        {
+            Config config = Config.GetInsrance();
+            String savePath = config.SavePath;
+            String newLine = config.NewLine;
+            string readText = "";
+            foreach (var kvp in config.Categories)
+            {
+                String fullPath = $"{savePath}news_{kvp.Key}.txt";
+                if (File.Exists(fullPath))
+                {
+                    readText = $"{readText}**{kvp.Value}{newLine}{newLine}{File.ReadAllText(fullPath)}{newLine}";
+                }
+            }
+            File.AppendAllText($"{savePath}news.txt", readText);
+        }
+
 
         private void ClipboardWatcher_DrawClipboard(object sender, EventArgs e)
         {
