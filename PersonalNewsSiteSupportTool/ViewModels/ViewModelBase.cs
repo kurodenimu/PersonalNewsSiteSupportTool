@@ -18,14 +18,17 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void ShowInfoMessage(string message, string title = "情報")
         {
+            Application.Current.MainWindow.Activate();
             Messenger.Raise(new InformationMessage(message, title, MessageBoxImage.Information, "Information"));
         }
         public void ShowErrorMessage(string message, string title = "エラー")
         {
+            Application.Current.MainWindow.Activate();
             Messenger.Raise(new InformationMessage(message, title, MessageBoxImage.Error, "Error"));
         }
         public bool ShowConfirmMessage(string message, string title = "確認")
         {
+            Application.Current.MainWindow.Activate();
             var confirmationMessage = new ConfirmationMessage(message, title, MessageBoxImage.Question, MessageBoxButton.OKCancel, "Confirm");
             Messenger.Raise(confirmationMessage);
 

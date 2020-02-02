@@ -7,17 +7,12 @@ namespace PersonalNewsSiteSupportTool.Models
     {
 
         private static Config instance = new Config();
-
-        private string savePath = "";
-
-        private string newLine = "\r\n";
-
-        private readonly List<KeyValuePair<String, String>> categories = new List<KeyValuePair<string, string>>();
-
-        public string SavePath { get => savePath; }
-        public string NewLine { get => newLine; }
-        public List<KeyValuePair<String, String>> Categories => categories;
         public static Config GetInsrance() => instance;
+
+        public string SavePath { get; private set; } = "";
+        public string NewLine { get; private set; } = "\r\n";
+        public List<KeyValuePair<String, String>> Categories { get; } = new List<KeyValuePair<string, string>>();
+        public string CategoryPrifix { get; private set; } = "";
 
         private Config()
         {
@@ -27,13 +22,14 @@ namespace PersonalNewsSiteSupportTool.Models
         public void ReloadConfig()
         {
             // 外部設定化する。
-            categories.Clear();
-            categories.Add(new KeyValuePair<string, string>("IT", "IT"));
-            categories.Add(new KeyValuePair<string, string>("その他", "その他"));
-            categories.Add(new KeyValuePair<string, string>("old", "新しくないけど気になったもの"));
+            Categories.Clear();
+            Categories.Add(new KeyValuePair<string, string>("IT", "IT"));
+            Categories.Add(new KeyValuePair<string, string>("その他", "その他"));
+            Categories.Add(new KeyValuePair<string, string>("old", "新しくないけど気になったもの"));
 
-            savePath = @"C:\Users\pyonko\Dropbox\";
-            newLine = "\n";
+            SavePath = @"C:\Users\pyonko\Dropbox\";
+            NewLine = "\n";
+            CategoryPrifix = "**";
         }
     }
 }
