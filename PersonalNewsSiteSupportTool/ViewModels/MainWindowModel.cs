@@ -14,10 +14,6 @@ namespace PersonalNewsSiteSupportTool.ViewModels
     class MainWindowModel : ViewModelBase
     {
 
-        // TODO :本クラス内ではクリップボードのためにウィンドウへのハンドルを参照している。
-        // 暫定的に他のウィンドウの直接操作も許容している。
-        // この辺りをどうするべきかは別途検討する。
-
         public ICommand LoadedCommand { get; private set; }
 
         public ICommand CompleteButtonClick { get; private set; }
@@ -76,10 +72,16 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 }
 
                 Config config = Config.GetInsrance();
-                String newLine = config.NewLine;
+                string newLine = config.NewLine;
 
-                File.AppendAllText($"{config.SavePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
-                Application.Current.MainWindow.Hide();
+                string fileName = $"news_{CategoryId}.txt";
+                string outText = $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}";
+
+                // File.AppendAllText($"{config.SavePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
+                if (AppendTextFile(config.SavePath, fileName, outText)) {
+                    // 書込みが成功した時だけウィンドウを隠す。
+                    Application.Current.MainWindow.Hide();
+                }
             }
         }
 
@@ -105,10 +107,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void Exit()
         {
-            var mainWindow = Application.Current.MainWindow;
-            mainWindow.Activate();
             if (ShowConfirmMessage("終了しますか"))
             {
+                clipboardWatcher.Stop();
                 Application.Current.Shutdown();
             }
         }
@@ -136,18 +137,20 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public void Cat()
         {
             Config config = Config.GetInsrance();
-            String savePath = config.SavePath;
-            String newLine = config.NewLine;
-            string readText = "";
+            string savePath = config.SavePath;
+            string newLine = config.NewLine;
+            string outText = "";
             foreach (var kvp in config.Categories)
             {
-                String fullPath = $"{savePath}news_{kvp.Key}.txt";
+                string fullPath = $"{savePath}news_{kvp.Key}.txt";
                 if (File.Exists(fullPath))
                 {
-                    readText = $"{readText}**{kvp.Value}{newLine}{newLine}{File.ReadAllText(fullPath)}{newLine}";
+                    outText += $"{config.CategoryPrifix}{kvp.Value}{newLine}{newLine}";
+                    outText += $"{File.ReadAllText(fullPath)}{newLine}";
                 }
             }
-            File.AppendAllText($"{savePath}news.txt", readText);
+            
+            OverwriteTextFile(savePath, "news.txt", outText);
         }
 
 
@@ -164,7 +167,6 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     if (mainWindow.Visibility == Visibility.Visible)
                     {
                         mainWindow.WindowState = WindowState.Normal;
-                        mainWindow.Activate();
                         if (!ShowConfirmMessage("現在の表示内容を消しても構いませんか。"))
                         {
                             return;
@@ -249,6 +251,41 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     this.NotifyPropertyChanged(nameof(NewsComment));
                 }
             }
+        }
+
+        private bool AppendTextFile(string folder, string fileName, string outText)
+        {
+            try
+            {
+                File.AppendAllText($"{folder}{fileName}", outText);
+            }
+            catch (Exception)
+            {
+                ShowErrorMessage("ファイル出力時にエラーが発生しました。");
+                return false;
+            }
+            return true;
+        }
+
+        private bool OverwriteTextFile(string folder, string fileName, string outText)
+        {
+            if (File.Exists($"{folder}{fileName}"))
+            {
+                if (!ShowConfirmMessage("出力先にファイルがありますが上書きしますか？"))
+                {
+                    return false;
+                }
+            }
+            try
+            {
+                File.WriteAllText($"{folder}{fileName}", outText);
+            }
+            catch (Exception)
+            {
+                ShowErrorMessage("ファイル出力時にエラーが発生しました。");
+                return false;
+            }
+            return true;
         }
 
         private void ConfigLoad()
