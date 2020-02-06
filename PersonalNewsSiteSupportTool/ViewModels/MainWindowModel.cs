@@ -24,15 +24,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         ClipboardWatcher clipboardWatcher = null;
 
-        private String categoryId;
+        private string categoryId;
 
-        private String newsUrl;
+        private string newsUrl;
 
-        private String via;
+        private string via;
 
         private bool isViaEditabled;
 
-        private String newsComment;
+        private string newsComment;
 
         private Regex newLineRegex = new Regex("\r\n|\r|\n");
 
@@ -61,24 +61,24 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
             if (CategoryId == null | "".Equals(CategoryId, StringComparison.Ordinal))
             {
-                MessageBox.Show("カテゴリが選択されていません。");
+                ShowInfoMessage("カテゴリが選択されていません。");
             }
             else
             {
+                Config config = Config.GetInsrance();
                 String viaText = "";
                 if (Via != null & !"".Equals(Via, StringComparison.Ordinal))
                 {
-                    viaText = $"（via：{Via}）";
+                    viaText = $"{config.ViaPrifix}{Via}{config.ViaPostfix}";
                 }
 
-                Config config = Config.GetInsrance();
                 string newLine = config.NewLine;
 
-                string fileName = $"news_{CategoryId}.txt";
+                string fileName = $"{config.OutFilePrifix}{CategoryId}{config.OutFilePostfix}";
                 string outText = $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}";
 
-                // File.AppendAllText($"{config.SavePath}news_{CategoryId}.txt", $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}");
-                if (AppendTextFile(config.SavePath, fileName, outText)) {
+                if (AppendTextFile(config.SavePath, fileName, outText))
+                {
                     // 書込みが成功した時だけウィンドウを隠す。
                     Application.Current.MainWindow.Hide();
                 }
@@ -149,7 +149,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     outText += $"{File.ReadAllText(fullPath)}{newLine}";
                 }
             }
-            
+
             OverwriteTextFile(savePath, "news.txt", outText);
         }
 
@@ -161,7 +161,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             if (Clipboard.ContainsText())
             {
                 String cbText = Clipboard.GetText();
-                if (cbText.StartsWith("***[", StringComparison.Ordinal))
+                if (cbText.StartsWith(Config.GetInsrance().WatchWord, StringComparison.Ordinal))
                 {
 
                     if (mainWindow.Visibility == Visibility.Visible)
@@ -180,6 +180,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     // 値が変更されていない扱いとなることがあるため強制的にプロパティ変更通知を行う。
                     via = "";
                     NotifyPropertyChanged(nameof(Via));
+                    isViaEditabled = true;
+                    NotifyPropertyChanged(nameof(IsViaEditabled));
                     newsComment = "";
                     NotifyPropertyChanged(nameof(NewsComment));
                 }
@@ -222,7 +224,19 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     via = value;
                     this.NotifyPropertyChanged(nameof(Via));
 
-                    IsViaEditabled = via == null | "".Equals(via, StringComparison.Ordinal);
+                    if (via == null | "".Equals(via, StringComparison.Ordinal))
+                    {
+                        IsViaEditabled = true;
+                    }
+                    else
+                    {
+                        foreach (var informationSource in this.InformationSources) {
+                            if (via == informationSource.Data)
+                            {
+                                IsViaEditabled = false;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -304,11 +318,11 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(Categories));
 
             // 情報元設定
-            this.InformationSources = new ObservableCollection<InformationSource>()
+            this.InformationSources = new ObservableCollection<InformationSource>();
+            foreach (var kvp in config.InformationSources)
             {
-                new InformationSource() { Name = "自分で入力", Data=""},
-                new InformationSource() { Name = "はてなブックマーク", Data = "はてなブックマーク"}
-            };
+                this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });
+            }
             this.NotifyPropertyChanged(nameof(InformationSources));
         }
     }
