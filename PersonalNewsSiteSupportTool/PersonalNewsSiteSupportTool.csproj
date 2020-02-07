@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="LICENSE\WPF-NotifyIcon_license.txt" />
+    <Resource Include="LICENSES\WPF-NotifyIcon_license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -207,6 +207,6 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>xcopy $(SolutionDir)LICENSE $(TargetDir) /y
-xcopy $(ProjectDir)LICENSE $(TargetDir)LICENSE\ /y</PostBuildEvent>
+xcopy $(ProjectDir)LICENSES $(TargetDir)LICENSES\ /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
