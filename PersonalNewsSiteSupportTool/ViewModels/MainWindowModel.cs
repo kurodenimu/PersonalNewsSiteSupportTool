@@ -75,7 +75,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 string newLine = config.NewLine;
 
                 string fileName = $"{config.OutFilePrifix}{CategoryId}{config.OutFilePostfix}";
-                string outText = $"{NewsUrl}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}";
+                string outText = $"{NewsUrl}{newLine}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}";
 
                 if (AppendTextFile(config.SavePath, fileName, outText))
                 {
