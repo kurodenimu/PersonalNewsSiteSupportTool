@@ -22,7 +22,7 @@
                  VerticalAlignment="Top" Width="760" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
         </TextBox>
         <Button Content="完了" HorizontalAlignment="Left" Margin="695,429,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CompleteButtonClick}"/>
-        <tb:TaskbarIcon IconSource="/Resources/MainIcon.ico" ToolTipText="PersonalNewsSiteSupportTool">
+        <tb:TaskbarIcon IconSource="/Resources/PersonalNewsSiteSupportToolIcon.ico" ToolTipText="PersonalNewsSiteSupportTool">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="結合" Command="{Binding CatCommand}" />
