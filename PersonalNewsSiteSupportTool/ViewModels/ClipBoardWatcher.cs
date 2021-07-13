@@ -6,17 +6,13 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 {
     public class ClipboardWatcher
     {
-        [DllImport("user32.dll")]
-        private static extern bool AddClipboardFormatListener(IntPtr hWnd);
-        [DllImport("user32.dll")]
-        private static extern bool RemoveClipboardFormatListener(IntPtr hWnd);
 
         // クリップボードが変更された時のメッセージコード
         private const int WM_CLIPBOARDUPDATE = 0x031D;
 
 
         IntPtr handle;
-        HwndSource hwndSource = null;
+        HwndSource hwndSource;
 
 
         public event EventHandler UpdateClipboard;
@@ -60,12 +56,21 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         //クリップボード監視開始
         public void Start()
         {
-            AddClipboardFormatListener(handle);
+            NativeMethods.AddClipboardFormatListener(handle);
         }
         //クリップボード監視停止
         public void Stop()
         {
-            RemoveClipboardFormatListener(handle);
+            NativeMethods.RemoveClipboardFormatListener(handle);
         }
+    }
+
+    internal static class NativeMethods
+    {
+        [DllImport("user32.dll")]
+        internal static extern bool AddClipboardFormatListener(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        internal static extern bool RemoveClipboardFormatListener(IntPtr hWnd);
+
     }
 }
