@@ -11,18 +11,19 @@ using System.Windows.Interop;
 
 namespace PersonalNewsSiteSupportTool.ViewModels
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1812")]
     class MainWindowModel : ViewModelBase
     {
 
-        public ICommand LoadedCommand { get; private set; }
+        public ViewModelCommand LoadedCommand { get; private set; }
 
-        public ICommand CompleteButtonClick { get; private set; }
+        public ViewModelCommand CompleteButtonClick { get; private set; }
 
         public ObservableCollection<Category> Categories { get; set; }
 
         public ObservableCollection<InformationSource> InformationSources { get; set; }
 
-        ClipboardWatcher clipboardWatcher = null;
+        ClipboardWatcher clipboardWatcher;
 
         private string categoryId;
 
@@ -38,8 +39,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public MainWindowModel()
         {
-            LoadedCommand = new CommandBase(LoadedAction);
-            CompleteButtonClick = new CommandBase(CompleteAction);
+            LoadedCommand = new ViewModelCommand(LoadedAction);
+            CompleteButtonClick = new ViewModelCommand(CompleteAction);
         }
 
         private void LoadedAction()
@@ -304,7 +305,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void ConfigLoad()
         {
-            // TODO 設定を読み込む時のメソッド。現在は固定値。
+            // 設定を読み込む時のメソッド。
             // 設定クラス再読込
             Config config = Config.GetInsrance();
             config.ReloadConfig();
