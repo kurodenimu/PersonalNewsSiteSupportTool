@@ -1,4 +1,5 @@
 ﻿using Livet.Commands;
+using Livet.Messaging;
 using PersonalNewsSiteSupportTool.Behaviors;
 using PersonalNewsSiteSupportTool.Models;
 using System;
@@ -18,6 +19,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public ViewModelCommand LoadedCommand { get; private set; }
 
         public ViewModelCommand CompleteButtonClick { get; private set; }
+
+        public ViewModelCommand OpenSettingsCommand { get; private set; }
 
         public ObservableCollection<Category> Categories { get; set; }
 
@@ -42,6 +45,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             LogService.init();
             LoadedCommand = new ViewModelCommand(LoadedAction);
             CompleteButtonClick = new ViewModelCommand(CompleteAction);
+            OpenSettingsCommand = new ViewModelCommand(OpenSettings);
             ExceptionHandling.Init();
         }
 
@@ -88,6 +92,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        private void OpenSettings()
+        {
+            Messenger.Raise(new TransitionMessage(new SettingsWindowViewModel(), "OpenSettings"));
+        }
 
         private ViewModelCommand _ExitCommand;
 

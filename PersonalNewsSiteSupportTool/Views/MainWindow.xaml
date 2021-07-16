@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:PersonalNewsSiteSupportTool.Views"
         xmlns:vm="clr-namespace:PersonalNewsSiteSupportTool.ViewModels"
         xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
         xmlns:tb="http://www.hardcodet.net/taskbar"
@@ -26,6 +27,7 @@
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="結合" Command="{Binding CatCommand}" />
+                    <MenuItem Header="設定" Command="{Binding OpenSettingsCommand}" />
                     <Separator />
                     <MenuItem Header="終了" Command="{Binding ExitCommand}" />
                 </ContextMenu>
@@ -47,6 +49,12 @@
         </l:InteractionMessageTrigger>
         <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="Error">
             <l:InformationDialogInteractionMessageAction/>
+        </l:InteractionMessageTrigger>
+        <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="OpenSettings">
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:SettingsWindow}"
+                                                  Mode="Normal"
+                                                  IsOwned="False"
+                                                  InvokeActionOnlyWhenWindowIsActive="False"/>
         </l:InteractionMessageTrigger>
     </i:Interaction.Triggers>
     <Window.DataContext>
