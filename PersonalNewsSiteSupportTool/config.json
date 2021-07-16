@@ -1,0 +1,39 @@
+{
+  "WatchWord": "***[",
+  "SavePath": "C:\\Users\\pyonko\\Dropbox\\",
+  "OutFilePrefix": "news_",
+  "OutFileSuffix": ".txt",
+  "NewLine": "\n",
+  "CategoryPrefix": "**",
+  "CategorySuffix": "",
+  "ViaPrefix": "（via：",
+  "ViaSuffix": "）",
+  "Categories": [
+    {
+      "Key": "IT",
+      "Value": "IT"
+    },
+    {
+      "Key": "その他",
+      "Value": "その他"
+    },
+    {
+      "Key": "old",
+      "Value": "新しくないけど気になったもの"
+    }
+  ],
+  "InformationSources": [
+    {
+      "Key": "",
+      "Value": "自分で入力"
+    },
+    {
+      "Key": "はてなブックマーク",
+      "Value": "はてなブックマーク"
+    },
+    {
+      "Key": "Twitter",
+      "Value": "Twitter"
+    }
+  ]
+}
