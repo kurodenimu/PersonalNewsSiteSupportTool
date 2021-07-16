@@ -153,6 +153,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ConfigManager.cs" />
+    <Compile Include="Models\ExceptionHandling.cs" />
+    <Compile Include="Models\LogService.cs" />
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\ClipBoardWatcher.cs" />
     <Compile Include="ViewModels\InformationSource.cs" />
@@ -181,7 +183,9 @@
     <None Include="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\LICENSE" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +213,11 @@
     <Resource Include="Resources\PersonalNewsSiteSupportToolIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NLog.Config">
+      <Version>4.7.10</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

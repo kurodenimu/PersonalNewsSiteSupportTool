@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using PersonalNewsSiteSupportTool.Models;
+using System.Windows;
 
 namespace PersonalNewsSiteSupportTool
 {
@@ -25,6 +26,11 @@ namespace PersonalNewsSiteSupportTool
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            LogService.final();
         }
     }
 }
