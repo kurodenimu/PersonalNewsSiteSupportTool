@@ -1,0 +1,18 @@
+﻿<Window x:Class="PersonalNewsSiteSupportTool.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:vm="clr-namespace:PersonalNewsSiteSupportTool.ViewModels"
+        xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
+        xmlns:local="clr-namespace:PersonalNewsSiteSupportTool.Views"
+        mc:Ignorable="d"
+        Title="設定" Height="450" Width="800">
+    <Grid>
+        <Label Content="監視する単語" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="92,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
