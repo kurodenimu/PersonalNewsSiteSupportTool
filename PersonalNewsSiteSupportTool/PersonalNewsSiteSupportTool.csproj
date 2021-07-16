@@ -225,4 +225,12 @@
 xcopy $(ProjectDir)LICENSES $(TargetDir)LICENSES\ /y
 move /y $(TargetDir)*.dll $(TargetDir)lib\</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>del $(TargetDir)LICENSE
+rd /s /q $(TargetDir)LICENSES
+rd /s /q $(TargetDir)lib
+mkdir $(TargetDir)lib
+rd /s /q $(TargetDir)logs
+mkdir $(TargetDir)logs</PreBuildEvent>
+  </PropertyGroup>
 </Project>
