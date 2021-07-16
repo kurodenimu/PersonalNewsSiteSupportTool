@@ -39,8 +39,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public MainWindowModel()
         {
+            LogService.init();
             LoadedCommand = new ViewModelCommand(LoadedAction);
             CompleteButtonClick = new ViewModelCommand(CompleteAction);
+            ExceptionHandling.Init();
         }
 
         private void LoadedAction()
