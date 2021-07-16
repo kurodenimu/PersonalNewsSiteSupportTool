@@ -66,16 +66,16 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
             else
             {
-                Config config = Config.GetInsrance();
+                Config config = ConfigManager.config;
                 String viaText = "";
                 if (Via != null & !"".Equals(Via, StringComparison.Ordinal))
                 {
-                    viaText = $"{config.ViaPrifix}{Via}{config.ViaPostfix}";
+                    viaText = $"{config.ViaPrefix}{Via}{config.ViaSuffix}";
                 }
 
                 string newLine = config.NewLine;
 
-                string fileName = $"{config.OutFilePrifix}{CategoryId}{config.OutFilePostfix}";
+                string fileName = $"{config.OutFilePrefix}{CategoryId}{config.OutFileSuffix}";
                 string outText = $"{NewsUrl}{newLine}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}";
 
                 if (AppendTextFile(config.SavePath, fileName, outText))
@@ -137,7 +137,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void Cat()
         {
-            Config config = Config.GetInsrance();
+            Config config = ConfigManager.config;
             string savePath = config.SavePath;
             string newLine = config.NewLine;
             string outText = "";
@@ -146,7 +146,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 string fullPath = $"{savePath}news_{kvp.Key}.txt";
                 if (File.Exists(fullPath))
                 {
-                    outText += $"{config.CategoryPrifix}{kvp.Value}{newLine}{newLine}";
+                    outText += $"{config.CategoryPrefix}{kvp.Value}{newLine}{newLine}";
                     outText += $"{File.ReadAllText(fullPath)}{newLine}";
                 }
             }
@@ -162,7 +162,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             if (Clipboard.ContainsText())
             {
                 String cbText = Clipboard.GetText();
-                if (cbText.StartsWith(Config.GetInsrance().WatchWord, StringComparison.Ordinal))
+                if (cbText.StartsWith(ConfigManager.config.WatchWord, StringComparison.Ordinal))
                 {
 
                     if (mainWindow.Visibility == Visibility.Visible)
@@ -307,8 +307,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         {
             // 設定を読み込む時のメソッド。
             // 設定クラス再読込
-            Config config = Config.GetInsrance();
-            config.ReloadConfig();
+            ConfigManager.ReloadConfig();
+            Config config = ConfigManager.config;
 
             this.Categories = new ObservableCollection<Category>();
             // カテゴリ設定
