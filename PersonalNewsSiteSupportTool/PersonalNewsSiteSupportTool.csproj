@@ -222,6 +222,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(SolutionDir)LICENSE $(TargetDir) /y
-xcopy $(ProjectDir)LICENSES $(TargetDir)LICENSES\ /y</PostBuildEvent>
+xcopy $(ProjectDir)LICENSES $(TargetDir)LICENSES\ /y
+move /y $(TargetDir)*.dll $(TargetDir)lib\</PostBuildEvent>
   </PropertyGroup>
 </Project>
