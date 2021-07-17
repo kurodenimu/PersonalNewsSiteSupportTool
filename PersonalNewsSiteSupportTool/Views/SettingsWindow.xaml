@@ -9,14 +9,14 @@
         xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
         xmlns:local="clr-namespace:PersonalNewsSiteSupportTool.Views"
         mc:Ignorable="d"
-        Title="設定" Height="450" Width="800">
+        Title="設定" Height="488.115" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Label Content="監視する単語" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="92,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="92,14,0,0" TextWrapping="Wrap" Text="{Binding WatchWord}" VerticalAlignment="Top" Width="120"/>
         <GroupBox Header="保存" HorizontalAlignment="Left" Height="196" Margin="10,42,0,0" VerticalAlignment="Top" Width="374">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -24,34 +24,45 @@
                     <ColumnDefinition Width="305*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="保存先フォルダ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="25,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="286" Grid.ColumnSpan="2"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="25,41,0,0" TextWrapping="Wrap" Text="{Binding SavePath}" VerticalAlignment="Top" Width="286" Grid.ColumnSpan="2"/>
                 <Button Content="..." HorizontalAlignment="Left" Margin="246,41,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1"/>
                 <Label Content="出力ファイル名先頭" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="39,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="229" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="39,75,0,0" TextWrapping="Wrap" Text="{Binding OutFilePrefix}" VerticalAlignment="Top" Width="229" Grid.Column="1"/>
                 <Label Content="出力ファイル名末尾" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="39,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="229" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="39,103,0,0" TextWrapping="Wrap" Text="{Binding OutFileSuffix}" VerticalAlignment="Top" Width="229" Grid.Column="1"/>
                 <Label Content="改行コード" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.045,-0.741"/>
-                <ComboBox HorizontalAlignment="Left" Margin="32.033,135,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                <ComboBox HorizontalAlignment="Left" Margin="32.033,135,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" 
+                          ItemsSource="{Binding NewLines}" SelectedItem="{Binding NewLine}" DisplayMemberPath="Name" SelectedValuePath="Code" SelectedValue="{Binding NewLineCode}"/>
             </Grid>
         </GroupBox>
         <GroupBox Header="出力書式" HorizontalAlignment="Left" Height="166" Margin="10,243,0,0" VerticalAlignment="Top" Width="374">
             <Grid>
                 <Label Content="カテゴリ先頭" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="84,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="84,14,0,0" TextWrapping="Wrap" Text="{Binding CategoryPrefix}" VerticalAlignment="Top" Width="158"/>
                 <Label Content="カテゴリ末尾" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="84,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="84,45,0,0" TextWrapping="Wrap" Text="{Binding CategorySuffix}" VerticalAlignment="Top" Width="158"/>
                 <Label Content="情報元先頭" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="85,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="157"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="85,76,0,0" TextWrapping="Wrap" Text="{Binding ViaPrefix}" VerticalAlignment="Top" Width="157"/>
                 <Label Content="情報元末尾" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="84,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
-                <Button Content="プレビュー" HorizontalAlignment="Left" Margin="277,113,0,0" VerticalAlignment="Top" Width="75"/>
-
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="84,107,0,0" TextWrapping="Wrap" Text="{Binding ViaSuffix}" VerticalAlignment="Top" Width="158"/>
             </Grid>
         </GroupBox>
         <Label Content="カテゴリ" Grid.Column="1" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top"/>
-        <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,49,0,0" VerticalAlignment="Top" Width="376"/>
+        <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,49,0,0" VerticalAlignment="Top" Width="376"
+                  ItemsSource="{Binding Categories}"/>
         <Label Content="情報元" Grid.Column="1" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
-        <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,246,0,0" VerticalAlignment="Top" Width="376"/>
-
+        <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,246,0,0" VerticalAlignment="Top" Width="376"
+                  ItemsSource="{Binding InformationSources}"/>
+        <Button Content="プレビュー" HorizontalAlignment="Left" Margin="309,427,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="保存" Grid.Column="1" HorizontalAlignment="Left" Margin="218,427,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="キャンセル" Grid.Column="1" HorizontalAlignment="Left" Margin="311,427,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.DataContext>
+        <vm:SettingsWindowViewModel />
+    </Window.DataContext>
 </Window>

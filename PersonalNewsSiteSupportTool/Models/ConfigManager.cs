@@ -10,6 +10,12 @@ namespace PersonalNewsSiteSupportTool.Models
 
         public static Config config { get; private set; }
 
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions
+        {
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All),
+            WriteIndented = true
+        };
+
         private ConfigManager()
         {
             
@@ -18,12 +24,13 @@ namespace PersonalNewsSiteSupportTool.Models
         public static void ReloadConfig()
         {
             string json = File.ReadAllText(@".\config.json", System.Text.Encoding.UTF8);
-            var options = new JsonSerializerOptions
-            {
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All),
-                WriteIndented = true
-            };
             config = JsonSerializer.Deserialize<Config>(json, options);
+        }
+
+        public static Config getCopyConfig()
+        {
+            string json = JsonSerializer.Serialize<Config>(config, options);
+            return JsonSerializer.Deserialize<Config>(json, options);
         }
     }
     public class Config
