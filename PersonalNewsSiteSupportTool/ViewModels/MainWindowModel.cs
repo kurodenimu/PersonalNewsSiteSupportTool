@@ -94,7 +94,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void OpenSettings()
         {
-            Messenger.Raise(new TransitionMessage(new SettingsWindowViewModel(), "OpenSettings"));
+            Messenger.Raise(new TransitionMessage(new SettingsWindowViewModel(this), "OpenSettings"));
         }
 
         private ViewModelCommand _ExitCommand;
@@ -313,7 +313,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             return true;
         }
 
-        private void ConfigLoad()
+        public void ConfigLoad()
         {
             // 設定を読み込む時のメソッド。
             // 設定クラス再読込

@@ -126,6 +126,13 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public ObservableCollection<NewLineItem> NewLines { get; set; }
 
+        private MainWindowModel mainWindow;
+
+        public SettingsWindowViewModel(MainWindowModel viewModel)
+        {
+            mainWindow = viewModel;
+        }
+
         // This method would be called from View, when ContentRendered event was raised.
         public void Initialize()
         {
@@ -136,19 +143,21 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(NewLines));
 
             beforeConfig = ConfigManager.getCopyConfig();
-            WatchWord = beforeConfig.WatchWord;
-            SavePath = beforeConfig.SavePath;
-            OutFilePrefix = beforeConfig.OutFilePrefix;
-            OutFileSuffix = beforeConfig.OutFileSuffix;
-            NewLineCode = beforeConfig.NewLine;
-            CategoryPrefix = beforeConfig.CategoryPrefix;
-            CategorySuffix = beforeConfig.CategorySuffix;
-            ViaPrefix = beforeConfig.ViaPrefix;
-            ViaSuffix = beforeConfig.ViaSuffix;
+
+            var config = ConfigManager.config;
+            WatchWord = config.WatchWord;
+            SavePath = config.SavePath;
+            OutFilePrefix = config.OutFilePrefix;
+            OutFileSuffix = config.OutFileSuffix;
+            NewLineCode = config.NewLine;
+            CategoryPrefix = config.CategoryPrefix;
+            CategorySuffix = config.CategorySuffix;
+            ViaPrefix = config.ViaPrefix;
+            ViaSuffix = config.ViaSuffix;
 
             this.Categories = new ObservableCollection<Category>();
             // カテゴリ設定
-            foreach (var kvp in beforeConfig.Categories)
+            foreach (var kvp in config.Categories)
             {
                 this.Categories.Add(new Category() { Name = kvp.Value, Id = kvp.Key });
             }
@@ -156,11 +165,66 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
             // 情報元設定
             this.InformationSources = new ObservableCollection<InformationSource>();
-            foreach (var kvp in beforeConfig.InformationSources)
+            foreach (var kvp in config.InformationSources)
             {
                 this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });
             }
             this.NotifyPropertyChanged(nameof(InformationSources));
         }
+
+
+        private ViewModelCommand _SaveCommand;
+
+        public ViewModelCommand SaveCommand
+        {
+            get
+            {
+                if (_SaveCommand == null)
+                {
+                    _SaveCommand = new ViewModelCommand(SaveDo);
+                }
+                return _SaveCommand;
+            }
+        }
+
+        public void SaveDo()
+        {
+            // 詰替え
+            var config = ConfigManager.config;
+            config.WatchWord = WatchWord;
+            config.SavePath = SavePath;
+            config.OutFilePrefix = OutFilePrefix;
+            config.OutFileSuffix = OutFileSuffix;
+            config.NewLine = NewLineCode;
+            config.CategoryPrefix = CategoryPrefix;
+            config.CategorySuffix = CategorySuffix;
+            config.ViaPrefix = ViaPrefix;
+            config.ViaSuffix = ViaSuffix;
+            // カテゴリ
+            config.Categories.Clear();
+            foreach (var category in this.Categories)
+            {
+                config.Categories.Add(new KeyValuePair<string, string>(category.Id, category.Name));
+            }
+            // 情報元
+            config.InformationSources.Clear();
+            foreach (var informationSource in this.InformationSources)
+            {
+                config.InformationSources.Add(new KeyValuePair<string, string>(informationSource.Data, informationSource.Name));
+            }
+
+            if (Equals(ConfigManager.config, beforeConfig))
+            {
+                // 処理なし
+            }
+            else
+            {
+                // ここでファイルに保存する。
+                ConfigManager.SaveConfig();
+            }
+            mainWindow.ConfigLoad();
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+
     }
 }
