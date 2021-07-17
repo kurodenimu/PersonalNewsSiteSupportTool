@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:PersonalNewsSiteSupportTool.Views"
         xmlns:vm="clr-namespace:PersonalNewsSiteSupportTool.ViewModels"
         xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
         xmlns:local="clr-namespace:PersonalNewsSiteSupportTool.Views"
@@ -54,15 +55,23 @@
         <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,246,0,0" VerticalAlignment="Top" Width="376"
                   ItemsSource="{Binding InformationSources}"/>
         <Button Content="プレビュー" HorizontalAlignment="Left" Margin="309,427,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="保存" Grid.Column="1" HorizontalAlignment="Left" Margin="218,427,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="保存" Grid.Column="1" HorizontalAlignment="Left" Margin="218,427,0,0" VerticalAlignment="Top" Width="75" 
+                Command="{Binding SaveCommand}"/>
         <Button Content="キャンセル" Grid.Column="1" HorizontalAlignment="Left" Margin="311,427,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="ContentRendered">
             <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
         </i:EventTrigger>
+        <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger, Mode=OneWay}">
+            <l:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"/>
+        </l:InteractionMessageTrigger>
+        <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="UpdateConfig">
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:MainWindow}"
+                                                  Mode="Normal"
+                                                  IsOwned="False"
+                                                  InvokeActionOnlyWhenWindowIsActive="False"
+                                                  />
+        </l:InteractionMessageTrigger>
     </i:Interaction.Triggers>
-    <Window.DataContext>
-        <vm:SettingsWindowViewModel />
-    </Window.DataContext>
 </Window>

@@ -27,6 +27,12 @@ namespace PersonalNewsSiteSupportTool.Models
             config = JsonSerializer.Deserialize<Config>(json, options);
         }
 
+        public static void SaveConfig()
+        {
+            var json = JsonSerializer.Serialize<Config>(config, options);
+            File.WriteAllText(@".\config.json", json, System.Text.Encoding.UTF8);
+        }
+
         public static Config getCopyConfig()
         {
             string json = JsonSerializer.Serialize<Config>(config, options);
