@@ -27,8 +27,8 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             string errorMember = e.Exception.TargetSite.Name;
             string errorMessage = e.Exception.Message;
-            string message = string.Format(@"UnhandledException occurred：{0}. ErrorMessage：{1}",
-                                      errorMember, errorMessage);
+            string message = string.Format(@"UnhandledException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
+                                      errorMember, errorMessage, e.Exception.StackTrace);
             LogService.errorLog(message);
         }
 
@@ -36,8 +36,8 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             string errorMember = e.Exception.TargetSite.Name;
             string errorMessage = e.Exception.Message;
-            string message = string.Format(@"Exception occurred：{0}. ErrorMessage：{1}",
-                                      errorMember, errorMessage);
+            string message = string.Format(@"Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
+                                      errorMember, errorMessage, e.Exception.StackTrace);
             LogService.errorLog(message);
         }
 
@@ -57,8 +57,8 @@ namespace PersonalNewsSiteSupportTool.Models
             {
                 errorMember = exception.TargetSite.Name;
                 errorMessage = exception.Message;
-                message = string.Format(@"Unhandled Exception occurred：{0}. ErrorMessage：{1}",
-                                          errorMember, errorMessage);
+                message = string.Format(@"Unhandled Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
+                                          errorMember, errorMessage, exception.StackTrace);
             }
             LogService.errorLog(message);
         }
@@ -67,8 +67,8 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             string errorMember = e.Exception.TargetSite.Name;
             string errorMessage = e.Exception.Message;
-            string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}",
-                                      errorMember, errorMessage);
+            string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
+                                      errorMember, errorMessage, e.Exception.StackTrace);
             LogService.errorLog(message);
         }
     }
