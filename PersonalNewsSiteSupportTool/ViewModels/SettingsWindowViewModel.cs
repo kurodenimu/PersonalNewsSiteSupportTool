@@ -19,92 +19,92 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         // Some useful code snippets for ViewModel are defined as l*(llcom, llcomn, lvcomm, lsprop, etc...).
         private Config beforeConfig;
 
-        private string _WatchWord;
+        private string watchWord;
 
         public string WatchWord
         {
-            get => _WatchWord;
-            set => RaisePropertyChangedIfSet(ref _WatchWord, value);
+            get => watchWord;
+            set => RaisePropertyChangedIfSet(ref watchWord, value);
         }
 
-        private string _SavePath;
+        private string savePath;
 
         public string SavePath
         {
-            get => _SavePath;
-            set => RaisePropertyChangedIfSet(ref _SavePath, value);
+            get => savePath;
+            set => RaisePropertyChangedIfSet(ref savePath, value);
         }
 
 
-        private string _OutFilePrefix;
+        private string outFilePrefix;
 
         public string OutFilePrefix
         {
-            get => _OutFilePrefix;
-            set => RaisePropertyChangedIfSet(ref _OutFilePrefix, value);
+            get => outFilePrefix;
+            set => RaisePropertyChangedIfSet(ref outFilePrefix, value);
         }
 
 
-        private string _OutFileSuffix;
+        private string outFileSuffix;
 
         public string OutFileSuffix
         {
-            get => _OutFileSuffix;
-            set => RaisePropertyChangedIfSet(ref _OutFileSuffix, value);
+            get => outFileSuffix;
+            set => RaisePropertyChangedIfSet(ref outFileSuffix, value);
         }
 
 
-        private NewLineItem _NewLine;
+        private NewLineItem newLine;
 
         public NewLineItem NewLine
         {
-            get => _NewLine;
-            set => RaisePropertyChangedIfSet(ref _NewLine, value);
+            get => newLine;
+            set => RaisePropertyChangedIfSet(ref newLine, value);
         }
 
 
-        private string _NewLineCode;
+        private string newLineCode;
 
         public string NewLineCode
         {
-            get => _NewLineCode;
-            set => RaisePropertyChangedIfSet(ref _NewLineCode, value);
+            get => newLineCode;
+            set => RaisePropertyChangedIfSet(ref newLineCode, value);
         }
 
 
-        private string _CategoryPrefix;
+        private string categoryPrefix;
 
         public string CategoryPrefix
         {
-            get => _CategoryPrefix;
-            set => RaisePropertyChangedIfSet(ref _CategoryPrefix, value);
+            get => categoryPrefix;
+            set => RaisePropertyChangedIfSet(ref categoryPrefix, value);
         }
 
 
-        private string _CategorySuffix;
+        private string categorySuffix;
 
         public string CategorySuffix
         {
-            get => _CategorySuffix;
-            set => RaisePropertyChangedIfSet(ref _CategorySuffix, value);
+            get => categorySuffix;
+            set => RaisePropertyChangedIfSet(ref categorySuffix, value);
         }
 
 
-        private string _ViaPrefix;
+        private string viaPrefix;
 
         public string ViaPrefix
         {
-            get => _ViaPrefix;
-            set => RaisePropertyChangedIfSet(ref _ViaPrefix, value);
+            get => viaPrefix;
+            set => RaisePropertyChangedIfSet(ref viaPrefix, value);
         }
 
 
-        private string _ViaSuffix;
+        private string viaSuffix;
 
         public string ViaSuffix
         {
-            get => _ViaSuffix;
-            set => RaisePropertyChangedIfSet(ref _ViaSuffix, value);
+            get => viaSuffix;
+            set => RaisePropertyChangedIfSet(ref viaSuffix, value);
         }
 
         public ObservableCollection<Category> Categories { get; set; }
@@ -142,9 +142,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             NewLines.Add(new NewLineItem("CR", "\r"));
             this.NotifyPropertyChanged(nameof(NewLines));
 
-            beforeConfig = ConfigManager.getCopyConfig();
+            beforeConfig = ConfigManager.GetCopyConfig();
 
-            var config = ConfigManager.config;
+            var config = ConfigManager.Config;
             WatchWord = config.WatchWord;
             SavePath = config.SavePath;
             OutFilePrefix = config.OutFilePrefix;
@@ -173,24 +173,24 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         }
 
 
-        private ViewModelCommand _SaveCommand;
+        private ViewModelCommand saveCommand;
 
         public ViewModelCommand SaveCommand
         {
             get
             {
-                if (_SaveCommand == null)
+                if (saveCommand == null)
                 {
-                    _SaveCommand = new ViewModelCommand(SaveDo);
+                    saveCommand = new ViewModelCommand(SaveDo);
                 }
-                return _SaveCommand;
+                return saveCommand;
             }
         }
 
         public void SaveDo()
         {
             // 詰替え
-            var config = ConfigManager.config;
+            var config = ConfigManager.Config;
             config.WatchWord = WatchWord;
             config.SavePath = SavePath;
             config.OutFilePrefix = OutFilePrefix;
@@ -213,7 +213,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 config.InformationSources.Add(new KeyValuePair<string, string>(informationSource.Data, informationSource.Name));
             }
 
-            if (Equals(ConfigManager.config, beforeConfig))
+            if (Equals(ConfigManager.Config, beforeConfig))
             {
                 // 処理なし
             }

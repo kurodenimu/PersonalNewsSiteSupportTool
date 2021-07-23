@@ -17,7 +17,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public event EventHandler UpdateClipboard;
         //イベント起動
-        private void raiseUpdateClipboard()
+        private void RaiseUpdateClipboard()
         {
             UpdateClipboard?.Invoke(this, EventArgs.Empty);
         }
@@ -35,7 +35,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         {
             if (msg == WM_CLIPBOARDUPDATE)
             {
-                this.raiseUpdateClipboard();
+                this.RaiseUpdateClipboard();
                 handled = true;
             }
             return IntPtr.Zero;
