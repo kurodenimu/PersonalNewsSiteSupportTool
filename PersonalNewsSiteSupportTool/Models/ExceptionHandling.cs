@@ -25,7 +25,7 @@ namespace PersonalNewsSiteSupportTool.Models
 
         private static void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            string errorMember = e.Exception.TargetSite.Name;
+            string errorMember = GetTargetSiteName(e.Exception);
             string errorMessage = e.Exception.Message;
             string message = string.Format(@"UnhandledException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
@@ -34,7 +34,7 @@ namespace PersonalNewsSiteSupportTool.Models
 
         private static void App_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
-            string errorMember = e.Exception.TargetSite.Name;
+            string errorMember = GetTargetSiteName(e.Exception);
             string errorMessage = e.Exception.Message;
             string message = string.Format(@"Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
@@ -55,7 +55,7 @@ namespace PersonalNewsSiteSupportTool.Models
             }
             else
             {
-                errorMember = exception.TargetSite.Name;
+                errorMember = GetTargetSiteName(exception);
                 errorMessage = exception.Message;
                 message = string.Format(@"Unhandled Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                           errorMember, errorMessage, exception.StackTrace);
@@ -70,6 +70,17 @@ namespace PersonalNewsSiteSupportTool.Models
             string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
             LogService.errorLog(message);
+        }
+
+        private static string GetTargetSiteName(Exception exception)
+        {
+            string ret = "";
+            if (exception.TargetSite != null)
+            {
+                ret = exception.TargetSite.Name;
+            }
+
+            return ret;
         }
     }
 }
