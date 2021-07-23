@@ -42,7 +42,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public MainWindowModel()
         {
-            LogService.init();
+            LogService.Init();
             LoadedCommand = new ViewModelCommand(LoadedAction);
             CompleteButtonClick = new ViewModelCommand(CompleteAction);
             OpenSettingsCommand = new ViewModelCommand(OpenSettings);
@@ -72,7 +72,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
             else
             {
-                Config config = ConfigManager.config;
+                Config config = ConfigManager.Config;
                 String viaText = "";
                 if (Via != null & !"".Equals(Via, StringComparison.Ordinal))
                 {
@@ -97,17 +97,17 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             Messenger.Raise(new TransitionMessage(new SettingsWindowViewModel(this), "OpenSettings"));
         }
 
-        private ViewModelCommand _ExitCommand;
+        private ViewModelCommand exitCommand;
 
         public ViewModelCommand ExitCommand
         {
             get
             {
-                if (_ExitCommand == null)
+                if (exitCommand == null)
                 {
-                    _ExitCommand = new ViewModelCommand(Exit, CanExit);
+                    exitCommand = new ViewModelCommand(Exit, CanExit);
                 }
-                return _ExitCommand;
+                return exitCommand;
             }
         }
 
@@ -126,17 +126,17 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         }
 
 
-        private ViewModelCommand _CatCommand;
+        private ViewModelCommand catCommand;
 
         public ViewModelCommand CatCommand
         {
             get
             {
-                if (_CatCommand == null)
+                if (catCommand == null)
                 {
-                    _CatCommand = new ViewModelCommand(Cat, CanCat);
+                    catCommand = new ViewModelCommand(Cat, CanCat);
                 }
-                return _CatCommand;
+                return catCommand;
             }
         }
 
@@ -147,7 +147,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void Cat()
         {
-            Config config = ConfigManager.config;
+            Config config = ConfigManager.Config;
             string savePath = config.SavePath;
             string newLine = config.NewLine;
             string outText = "";
@@ -172,7 +172,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             if (Clipboard.ContainsText())
             {
                 String cbText = Clipboard.GetText();
-                if (cbText.StartsWith(ConfigManager.config.WatchWord, StringComparison.Ordinal))
+                if (cbText.StartsWith(ConfigManager.Config.WatchWord, StringComparison.Ordinal))
                 {
 
                     if (mainWindow.Visibility == Visibility.Visible)
@@ -318,7 +318,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             // 設定を読み込む時のメソッド。
             // 設定クラス再読込
             ConfigManager.ReloadConfig();
-            Config config = ConfigManager.config;
+            Config config = ConfigManager.Config;
 
             this.Categories = new ObservableCollection<Category>();
             // カテゴリ設定

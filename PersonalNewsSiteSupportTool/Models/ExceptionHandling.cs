@@ -29,7 +29,7 @@ namespace PersonalNewsSiteSupportTool.Models
             string errorMessage = e.Exception.Message;
             string message = string.Format(@"UnhandledException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
-            LogService.errorLog(message);
+            LogService.ErrorLog(message);
         }
 
         private static void App_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
@@ -38,7 +38,7 @@ namespace PersonalNewsSiteSupportTool.Models
             string errorMessage = e.Exception.Message;
             string message = string.Format(@"Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
-            LogService.errorLog(message);
+            LogService.ErrorLog(message);
         }
 
         private static void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -60,7 +60,7 @@ namespace PersonalNewsSiteSupportTool.Models
                 message = string.Format(@"Unhandled Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                           errorMember, errorMessage, exception.StackTrace);
             }
-            LogService.errorLog(message);
+            LogService.ErrorLog(message);
         }
 
         private static void App_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
@@ -69,7 +69,7 @@ namespace PersonalNewsSiteSupportTool.Models
             string errorMessage = e.Exception.Message;
             string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
-            LogService.errorLog(message);
+            LogService.ErrorLog(message);
         }
 
         private static string GetTargetSiteName(Exception exception)

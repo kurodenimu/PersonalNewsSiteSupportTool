@@ -16,7 +16,7 @@ namespace PersonalNewsSiteSupportTool.Models
             false;
 #endif
 
-        public static void init()
+        public static void Init()
         {
             if (!isInit)
             {
@@ -30,18 +30,18 @@ namespace PersonalNewsSiteSupportTool.Models
             }
         }
 
-        public static void final()
+        public static void Final()
         {
             logger.Info("End App.");
             LogManager.Flush();
         }
 
-        public static void errorLog(String msg)
+        public static void ErrorLog(String msg)
         {
             logger.Error(msg);
         }
 
-        public static void debugLog(String msg)
+        public static void DebugLog(String msg)
         {
             if (isDebug)
             {
