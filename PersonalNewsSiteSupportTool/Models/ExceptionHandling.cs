@@ -65,7 +65,7 @@ namespace PersonalNewsSiteSupportTool.Models
 
         private static void App_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            string errorMember = e.Exception.TargetSite.Name;
+            string errorMember = GetTargetSiteName(e.Exception);
             string errorMessage = e.Exception.Message;
             string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
                                       errorMember, errorMessage, e.Exception.StackTrace);
