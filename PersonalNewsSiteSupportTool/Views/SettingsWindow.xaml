@@ -54,10 +54,12 @@
         <Label Content="情報元" Grid.Column="1" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
         <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,246,0,0" VerticalAlignment="Top" Width="376"
                   ItemsSource="{Binding InformationSources}"/>
-        <Button Content="プレビュー" HorizontalAlignment="Left" Margin="309,427,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="プレビュー" HorizontalAlignment="Left" Margin="309,427,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding PreviewCommand}"/>
         <Button Content="保存" Grid.Column="1" HorizontalAlignment="Left" Margin="218,427,0,0" VerticalAlignment="Top" Width="75" 
                 Command="{Binding SaveCommand}"/>
-        <Button Content="キャンセル" Grid.Column="1" HorizontalAlignment="Left" Margin="311,427,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="キャンセル" Grid.Column="1" HorizontalAlignment="Left" Margin="311,427,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding CancelCommand}"/>
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="ContentRendered">
@@ -66,12 +68,11 @@
         <l:InteractionMessageTrigger MessageKey="Close" Messenger="{Binding Messenger, Mode=OneWay}">
             <l:WindowInteractionMessageAction InvokeActionOnlyWhenWindowIsActive="False"/>
         </l:InteractionMessageTrigger>
-        <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="UpdateConfig">
-            <l:TransitionInteractionMessageAction WindowType="{x:Type v:MainWindow}"
-                                                  Mode="Normal"
+        <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="Preview">
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:OutTextPreview}"
+                                                  Mode="Modal"
                                                   IsOwned="False"
-                                                  InvokeActionOnlyWhenWindowIsActive="False"
-                                                  />
+                                                  InvokeActionOnlyWhenWindowIsActive="False"/>
         </l:InteractionMessageTrigger>
     </i:Interaction.Triggers>
 </Window>

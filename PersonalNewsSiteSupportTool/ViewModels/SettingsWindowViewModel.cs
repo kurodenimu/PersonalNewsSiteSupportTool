@@ -174,7 +174,6 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(InformationSources));
         }
 
-
         private ViewModelCommand saveCommand;
 
         public ViewModelCommand SaveCommand
@@ -191,8 +190,64 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void SaveDo()
         {
-            // 詰替え
-            var config = ConfigManager.Config;
+            UpdateConfig(ConfigManager.Config);
+
+            if (Equals(ConfigManager.Config, beforeConfig))
+            {
+                // 処理なし
+            }
+            else
+            {
+                // ここでファイルに保存する。
+                ConfigManager.SaveConfig();
+                mainWindow.ConfigLoad();
+            }
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+
+
+        private ViewModelCommand cancelCommand;
+
+        public ViewModelCommand CancelCommand
+        {
+            get
+            {
+                if (cancelCommand == null)
+                {
+                    cancelCommand = new ViewModelCommand(Cancel);
+                }
+                return cancelCommand;
+            }
+        }
+
+        public void Cancel()
+        {
+            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
+        }
+
+        private ViewModelCommand previewCommand;
+
+        public ViewModelCommand PreviewCommand
+        {
+            get
+            {
+                if (previewCommand == null)
+                {
+                    previewCommand = new ViewModelCommand(Preview);
+                }
+                return previewCommand;
+            }
+        }
+
+        public void Preview()
+        {
+            var config = ConfigManager.GetCopyConfig();
+            UpdateConfig(config);
+            Messenger.Raise(new TransitionMessage(new OutTextPreviewViewModel(config), "Preview"));
+        }
+
+        private void UpdateConfig(Config config)
+        {
             config.WatchWord = WatchWord;
             config.SavePath = SavePath;
             config.OutFilePrefix = OutFilePrefix;
@@ -214,19 +269,6 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             {
                 config.InformationSources.Add(new KeyValuePair<string, string>(informationSource.Data, informationSource.Name));
             }
-
-            if (Equals(ConfigManager.Config, beforeConfig))
-            {
-                // 処理なし
-            }
-            else
-            {
-                // ここでファイルに保存する。
-                ConfigManager.SaveConfig();
-            }
-            mainWindow.ConfigLoad();
-            Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
-
     }
 }
