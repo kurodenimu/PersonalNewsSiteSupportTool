@@ -37,8 +37,6 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private string newsComment;
 
-        private readonly Regex newLineRegex = new Regex("\r\n|\r|\n");
-
         public MainWindowModel()
         {
             LogService.Init();
@@ -72,16 +70,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             else
             {
                 Config config = ConfigManager.Config;
-                String viaText = "";
-                if (Via != null & !"".Equals(Via, StringComparison.Ordinal))
-                {
-                    viaText = $"{config.ViaPrefix}{Via}{config.ViaSuffix}";
-                }
-
-                string newLine = config.NewLine;
 
                 string fileName = $"{config.OutFilePrefix}{CategoryId}{config.OutFileSuffix}";
-                string outText = $"{NewsUrl}{newLine}{viaText}{newLine}{newLineRegex.Replace(NewsComment, newLine)}{newLine}{newLine}";
+                string outText = CommonUtil.GetOutText(NewsUrl, Via, NewsComment);
 
                 if (AppendTextFile(config.SavePath, fileName, outText))
                 {
