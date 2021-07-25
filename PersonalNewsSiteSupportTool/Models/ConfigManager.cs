@@ -41,6 +41,7 @@ namespace PersonalNewsSiteSupportTool.Models
     }
     public class Config
     {
+        public string Version { get; set; } = "";
         public string WatchWord { get; set; } = "";
         public string SavePath { get; set; } = "";
         public string OutFilePrefix { get; set; } = "";
