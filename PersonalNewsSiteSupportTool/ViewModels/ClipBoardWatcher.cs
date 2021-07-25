@@ -9,10 +9,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         // クリップボードが変更された時のメッセージコード
         private const int WM_CLIPBOARDUPDATE = 0x031D;
-
-
-        IntPtr handle;
-        HwndSource hwndSource;
+        private readonly IntPtr handle;
+        private readonly HwndSource hwndSource;
 
 
         public event EventHandler UpdateClipboard;

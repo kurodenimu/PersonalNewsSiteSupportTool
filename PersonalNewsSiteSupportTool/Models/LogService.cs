@@ -5,11 +5,11 @@ namespace PersonalNewsSiteSupportTool.Models
 {
     public static class LogService
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         private static bool isInit = false;
 
-        private static readonly bool isDebug =
+        private const bool isDebug =
 #if DEBUG
             true;
 #else
@@ -27,6 +27,7 @@ namespace PersonalNewsSiteSupportTool.Models
                 }
                 logger.Info("Start app.");
                 LogManager.Flush();
+                isInit = true;
             }
         }
 

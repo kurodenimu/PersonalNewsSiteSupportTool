@@ -51,9 +51,8 @@ namespace PersonalNewsSiteSupportTool.Models
         public string ViaPrefix { get; set; } = "";
         public string ViaSuffix { get; set; } = "";
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2227:コレクション プロパティは読み取り専用でなければなりません", Justification = "<保留中>")]
         public List<KeyValuePair<String, String>> Categories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2227:コレクション プロパティは読み取り専用でなければなりません", Justification = "<保留中>")]
+        
         public List<KeyValuePair<String, String>> InformationSources { get; set; }
     }
 }

@@ -126,7 +126,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public ObservableCollection<NewLineItem> NewLines { get; set; }
 
-        private MainWindowModel mainWindow;
+        private readonly MainWindowModel mainWindow;
 
         public SettingsWindowViewModel(MainWindowModel viewModel)
         {
@@ -136,10 +136,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         // This method would be called from View, when ContentRendered event was raised.
         public void Initialize()
         {
-            NewLines = new ObservableCollection<NewLineItem>();
-            NewLines.Add(new NewLineItem("CRLF", "\r\n"));
-            NewLines.Add(new NewLineItem("LF", "\n"));
-            NewLines.Add(new NewLineItem("CR", "\r"));
+            NewLines = new ObservableCollection<NewLineItem>
+            {
+                new NewLineItem("CRLF", "\r\n"),
+                new NewLineItem("LF", "\n"),
+                new NewLineItem("CR", "\r")
+            };
             this.NotifyPropertyChanged(nameof(NewLines));
 
             beforeConfig = ConfigManager.GetCopyConfig();
