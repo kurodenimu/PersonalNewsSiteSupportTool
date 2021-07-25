@@ -20,6 +20,7 @@ namespace PersonalNewsSiteSupportTool.Models
                 AppDomain.CurrentDomain.UnhandledException += App_UnhandledException;
                 // バックグラウンドタスクで発生した例外
                 TaskScheduler.UnobservedTaskException += App_UnobservedTaskException;
+                initFlag = true;
             }
         }
 
@@ -43,13 +44,11 @@ namespace PersonalNewsSiteSupportTool.Models
 
         private static void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            var exception = e.ExceptionObject as Exception;
-
             string errorMember;
             string errorMessage;
             string message;
 
-            if (exception == null)
+            if (!(e.ExceptionObject is Exception exception))
             {
                 message = "Unhandled Exception occurred. But not System.Exception." + e.ToString();
             }

@@ -12,7 +12,6 @@ using System.Windows.Interop;
 
 namespace PersonalNewsSiteSupportTool.ViewModels
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1812")]
     class MainWindowModel : ViewModelBase
     {
 
@@ -38,7 +37,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private string newsComment;
 
-        private Regex newLineRegex = new Regex("\r\n|\r|\n");
+        private readonly Regex newLineRegex = new Regex("\r\n|\r|\n");
 
         public MainWindowModel()
         {

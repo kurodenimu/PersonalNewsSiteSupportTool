@@ -4,7 +4,6 @@ using System.Windows;
 
 namespace PersonalNewsSiteSupportTool.Behaviors
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1812")]
     class WindowClosingAction : TriggerAction<Window>
     {
         protected override void Invoke(object parameter)
