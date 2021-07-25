@@ -283,6 +283,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             {
                 File.AppendAllText($"{folder}{fileName}", outText);
             }
+            catch (PathTooLongException e)
+            {
+                ShowErrorMessage($"出力先のファイルパスが長すぎます。\n{folder}{fileName}");
+                LogService.DumpException(e);
+                return false;
+            }
             catch (DirectoryNotFoundException e)
             {
                 ShowErrorMessage($"出力先のフォルダが見つかりませんでした。\n{folder}");
@@ -316,6 +322,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             try
             {
                 File.WriteAllText($"{folder}{fileName}", outText);
+            }
+            catch (PathTooLongException e)
+            {
+                ShowErrorMessage($"出力先のファイルパスが長すぎます。\n{folder}{fileName}");
+                LogService.DumpException(e);
+                return false;
             }
             catch (DirectoryNotFoundException e)
             {
