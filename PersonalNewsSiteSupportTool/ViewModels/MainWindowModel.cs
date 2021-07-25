@@ -283,9 +283,22 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             {
                 File.AppendAllText($"{folder}{fileName}", outText);
             }
-            catch (Exception)
+            catch (DirectoryNotFoundException e)
+            {
+                ShowErrorMessage($"出力先のフォルダが見つかりませんでした。\n{folder}");
+                LogService.DumpException(e);
+                return false;
+            }
+            catch (IOException e)
             {
                 ShowErrorMessage("ファイル出力時にエラーが発生しました。");
+                LogService.DumpException(e);
+                return false;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                ShowErrorMessage("ファイル出力時にエラーが発生しました。");
+                LogService.DumpException(e);
                 return false;
             }
             return true;
@@ -304,9 +317,22 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             {
                 File.WriteAllText($"{folder}{fileName}", outText);
             }
-            catch (Exception)
+            catch (DirectoryNotFoundException e)
+            {
+                ShowErrorMessage($"出力先のフォルダが見つかりませんでした。\n{folder}");
+                LogService.DumpException(e);
+                return false;
+            }
+            catch (IOException e)
             {
                 ShowErrorMessage("ファイル出力時にエラーが発生しました。");
+                LogService.DumpException(e);
+                return false;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                ShowErrorMessage("ファイル出力時にエラーが発生しました。");
+                LogService.DumpException(e);
                 return false;
             }
             return true;
