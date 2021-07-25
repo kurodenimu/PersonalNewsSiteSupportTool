@@ -9,7 +9,9 @@ namespace PersonalNewsSiteSupportTool.Models
 
         private static bool isInit = false;
 
-        private const bool isDebug =
+#pragma warning disable CA1802 // Use literals where appropriate
+        private static readonly bool isDebug =
+#pragma warning restore CA1802 // Use literals where appropriate
 #if DEBUG
             true;
 #else
@@ -40,6 +42,13 @@ namespace PersonalNewsSiteSupportTool.Models
         public static void ErrorLog(String msg)
         {
             logger.Error(msg);
+        }
+
+        public static void DumpException(Exception e)
+        {
+            string msg = string.Format(@"Exception occurred : {0}. ErrorMessage：{1}, StackTrace：{2}",
+                e.GetType().Name, e.Message, e.StackTrace);
+            ErrorLog(msg);
         }
 
         public static void DebugLog(String msg)
