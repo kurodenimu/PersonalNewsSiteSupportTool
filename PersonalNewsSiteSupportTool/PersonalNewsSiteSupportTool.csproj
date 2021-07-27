@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\CommonUtil.cs" />
+    <Compile Include="Models\PathConstant.cs" />
     <Compile Include="ViewModels\OutTextPreviewViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="Views\OutTextPreview.xaml.cs">
