@@ -1,11 +1,14 @@
 ﻿using NLog;
 using System;
+using System.IO;
 
 namespace PersonalNewsSiteSupportTool.Models
 {
     public static class LogService
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        private static readonly string logPath = PathConstant.APP_DATA_PATH + @"\logs";
 
         private static bool isInit = false;
 
@@ -22,6 +25,10 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             if (!isInit)
             {
+                if (!Directory.Exists(logPath))
+                {
+                    Directory.CreateDirectory(logPath);
+                }
                 if (!isDebug)
                 {
                     var config = LogManager.Configuration;

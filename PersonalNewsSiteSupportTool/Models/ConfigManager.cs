@@ -10,6 +10,10 @@ namespace PersonalNewsSiteSupportTool.Models
 
         public static Config Config { get; private set; }
 
+        private static readonly string defaultConfigPath = PathConstant.APP_PATH + @"\config.json";
+
+        private static readonly string configPath = PathConstant.APP_DATA_PATH + @"\config.json";
+
         private static readonly JsonSerializerOptions options = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All),
@@ -23,14 +27,19 @@ namespace PersonalNewsSiteSupportTool.Models
 
         public static void ReloadConfig()
         {
-            string json = File.ReadAllText(@".\config.json", System.Text.Encoding.UTF8);
+            // 起動時のログ出力で必ずフォルダが作成されているのでフォルダの存在判定は行わない。
+            if (!File.Exists(configPath))
+            {
+                File.Copy(defaultConfigPath, configPath);
+            }
+            string json = File.ReadAllText(configPath, System.Text.Encoding.UTF8);
             Config = JsonSerializer.Deserialize<Config>(json, options);
         }
 
         public static void SaveConfig()
         {
             var json = JsonSerializer.Serialize<Config>(Config, options);
-            File.WriteAllText(@".\config.json", json, System.Text.Encoding.UTF8);
+            File.WriteAllText(configPath, json, System.Text.Encoding.UTF8);
         }
 
         public static Config GetCopyConfig()
