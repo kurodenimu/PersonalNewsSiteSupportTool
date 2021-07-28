@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -24,7 +25,13 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public string WatchWord
         {
             get => watchWord;
-            set => RaisePropertyChangedIfSet(ref watchWord, value);
+            set {
+                if (string.IsNullOrEmpty(value))
+                {
+                    ShowErrorMessage("監視する単語が未設定です。");
+                }
+                RaisePropertyChangedIfSet(ref watchWord, value);
+            }
         }
 
         private string savePath;
@@ -190,6 +197,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         public void SaveDo()
         {
+            if (!Validate())
+            {
+                return;
+            }
             UpdateConfig(ConfigManager.Config);
 
             if (Equals(ConfigManager.Config, beforeConfig))
@@ -269,6 +280,28 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             {
                 config.InformationSources.Add(new KeyValuePair<string, string>(informationSource.Data, informationSource.Name));
             }
+        }
+
+        private bool Validate()
+        {
+            // 保存先
+            if (!Directory.Exists(savePath))
+            {
+                ShowErrorMessage("保存先フォルダが存在しません。");
+                return false;
+            }
+            // カテゴリ
+            var hashset = new HashSet<string>();
+            foreach (var category in this.Categories)
+            {
+                // ID重複チェック
+                if (!hashset.Add(category.Id))
+                {
+                    ShowErrorMessage($"カテゴリーのID、{category.Id}が重複しています。");
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
