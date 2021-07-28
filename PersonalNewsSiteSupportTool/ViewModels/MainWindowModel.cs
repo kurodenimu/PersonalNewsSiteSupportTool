@@ -358,6 +358,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
             // 情報元設定
             this.InformationSources = new ObservableCollection<InformationSource>();
+            this.InformationSources.Add(new InformationSource() { Name = "自分で入力", Data = "" });
             foreach (var kvp in config.InformationSources)
             {
                 this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });
