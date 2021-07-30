@@ -28,7 +28,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             set {
                 if (string.IsNullOrEmpty(value))
                 {
-                    ShowErrorMessage("監視する単語が未設定です。");
+                    // ShowErrorMessage("監視する単語は入力必須です。");
                 }
                 RaisePropertyChangedIfSet(ref watchWord, value);
             }
@@ -48,7 +48,14 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public string OutFilePrefix
         {
             get => outFilePrefix;
-            set => RaisePropertyChangedIfSet(ref outFilePrefix, value);
+            set
+            {
+                if(!CommonUtil.ValidateFileName(value))
+                {
+                    ShowErrorMessage($"出力ファイル名先頭にファイルに含められない文字列({CommonUtil.CANNOT_USED_FILE_NAME})が含まれています。");
+                }
+                RaisePropertyChangedIfSet(ref outFilePrefix, value);
+            }
         }
 
 
@@ -57,7 +64,14 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public string OutFileSuffix
         {
             get => outFileSuffix;
-            set => RaisePropertyChangedIfSet(ref outFileSuffix, value);
+            set
+            {
+                if (!CommonUtil.ValidateFileName(value))
+                {
+                    ShowErrorMessage($"出力ファイル名末尾にファイルに含められない文字列({CommonUtil.CANNOT_USED_FILE_NAME})が含まれています。");
+                }
+                RaisePropertyChangedIfSet(ref outFileSuffix, value);
+            }
         }
 
 
@@ -284,6 +298,23 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private bool Validate()
         {
+            // 監視する単語
+            if (string.IsNullOrEmpty(WatchWord))
+            {
+                ShowErrorMessage("監視する単語は入力必須です。");
+                return false;
+            }
+            // 出力ファイル名
+            if (!CommonUtil.ValidateFileName(OutFilePrefix))
+            {
+                ShowErrorMessage($"出力ファイル名先頭にファイルに含められない文字列({CommonUtil.CANNOT_USED_FILE_NAME})が含まれています。");
+                return false;
+            }
+            if (!CommonUtil.ValidateFileName(OutFileSuffix))
+            {
+                ShowErrorMessage($"出力ファイル名末尾にファイルに含められない文字列({CommonUtil.CANNOT_USED_FILE_NAME})が含まれています。");
+                return false;
+            }
             // 保存先
             if (!Directory.Exists(savePath))
             {
@@ -297,7 +328,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 // ID重複チェック
                 if (!hashset.Add(category.Id))
                 {
-                    ShowErrorMessage($"カテゴリーのID、{category.Id}が重複しています。");
+                    ShowErrorMessage($"カテゴリのID、{category.Id}が重複しています。");
                     return false;
                 }
             }
