@@ -27,5 +27,11 @@ namespace PersonalNewsSiteSupportTool.Models
 
             return $"{newsUrl}{newLine}{viaText}{newLineRegex.Replace(newsComment, newLine)}{newLine}{newLine}";
         }
+
+        public const string CANNOT_USED_FILE_NAME = @"\/:*?""<>|";
+        public static bool ValidateFileName(string target)
+        {
+            return !Regex.IsMatch(target, @"[\\/:*?""<>|]");
+        }
     }
 }
