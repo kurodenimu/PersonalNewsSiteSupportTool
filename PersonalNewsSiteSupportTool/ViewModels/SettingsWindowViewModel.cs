@@ -28,7 +28,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             set {
                 if (string.IsNullOrEmpty(value))
                 {
-                    // ShowErrorMessage("監視する単語は入力必須です。");
+                    ShowErrorMessage("監視する単語は入力必須です。");
                 }
                 RaisePropertyChangedIfSet(ref watchWord, value);
             }
