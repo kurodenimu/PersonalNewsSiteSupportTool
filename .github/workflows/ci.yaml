@@ -16,8 +16,9 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
       - name: Restore Packages
-        run: nuget restore PersonalNewsSiteSupportTool\PersonalNewsSiteSupportTool.csproj
-             nuget restore UnittestProject\UnittestProject.csproj
+        run: |
+          nuget restore PersonalNewsSiteSupportTool\PersonalNewsSiteSupportTool.csproj
+          nuget restore UnittestProject\UnittestProject.csproj
 
       - run: msbuild
       - run: dotnet test
