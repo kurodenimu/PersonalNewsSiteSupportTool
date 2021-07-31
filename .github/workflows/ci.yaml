@@ -12,7 +12,7 @@ jobs:
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
         with:
-            vs-version: '[16.8,16.10)'
+            vs-version: '[16.4,16.5)'
 
       - run: dotnet build
       - run: dotnet test
