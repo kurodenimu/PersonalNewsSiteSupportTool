@@ -17,6 +17,7 @@ jobs:
 
       - name: Restore Packages
         run: nuget restore PersonalNewsSiteSupportTool\PersonalNewsSiteSupportTool.csproj
-      - run: nuget restore UnittestProject\UnittestProject.csproj
+             nuget restore UnittestProject\UnittestProject.csproj
 
       - run: msbuild
+      - run: dotnet test
