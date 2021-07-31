@@ -27,6 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTest
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{E343A739-4F8E-4337-BAA9-5B718BE6C207}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{120C51C5-5C6F-4462-B372-9BC5108FF2FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{80D441BA-0474-49B9-A24C-A82E0CA6650C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yaml = .github\workflows\ci.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +70,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BD3942A5-7CC0-4D67-9DA5-BF9285BE56FA} = {613B79BA-F4E1-488B-B5F2-B5519EA7CAD2}
+		{80D441BA-0474-49B9-A24C-A82E0CA6650C} = {120C51C5-5C6F-4462-B372-9BC5108FF2FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06A5C38B-8565-40D3-8FC0-3C4795EA0B81}
