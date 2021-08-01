@@ -52,6 +52,7 @@ namespace PersonalNewsSiteSupportTool.Models
     {
         public string Version { get; set; } = "";
         public string WatchWord { get; set; } = "";
+        public bool IsRemoveWatchWord { get; set; } = true;
         public string SavePath { get; set; } = "";
         public string OutFilePrefix { get; set; } = "";
         public string OutFileSuffix { get; set; } = "";

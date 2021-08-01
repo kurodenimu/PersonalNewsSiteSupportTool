@@ -162,7 +162,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             if (Clipboard.ContainsText())
             {
                 String cbText = Clipboard.GetText();
-                if (cbText.StartsWith(ConfigManager.Config.WatchWord, StringComparison.Ordinal))
+                Config config = ConfigManager.Config;
+                if (cbText.StartsWith(config.WatchWord, StringComparison.Ordinal))
                 {
 
                     if (mainWindow.Visibility == Visibility.Visible)
@@ -183,7 +184,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     {
                         CategoryId = null;
                     }
-                    NewsUrl = cbText;
+                    if (config.IsRemoveWatchWord)
+                    {
+                        NewsUrl = cbText.Replace(config.WatchWord, "");
+                    }
+                    else
+                    {
+                        NewsUrl = cbText;
+                    }
+                    
                     // テキストボックス欄にフォーカスがあった場合、VMの値が更新されておらず
                     // 値が変更されていない扱いとなることがあるため強制的にプロパティ変更通知を行う。
                     via = "";
