@@ -84,7 +84,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private void OpenSettings()
         {
-            Messenger.Raise(new TransitionMessage(new SettingsWindowViewModel(this), "OpenSettings"));
+            Messenger.Raise(new TransitionMessage(SettingsWindowViewModel.GetInstance(this), "OpenSettings"));
         }
 
         private ViewModelCommand exitCommand;
@@ -357,8 +357,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(Categories));
 
             // 情報元設定
-            this.InformationSources = new ObservableCollection<InformationSource>();
-            this.InformationSources.Add(new InformationSource() { Name = "自分で入力", Data = "" });
+            this.InformationSources = new ObservableCollection<InformationSource>
+            {
+                new InformationSource() { Name = "自分で入力", Data = "" }
+            };
             foreach (var kvp in config.InformationSources)
             {
                 this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });

@@ -52,7 +52,7 @@
         </l:InteractionMessageTrigger>
         <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="OpenSettings">
             <l:TransitionInteractionMessageAction WindowType="{x:Type v:SettingsWindow}"
-                                                  Mode="Normal"
+                                                  Mode="NewOrActive"
                                                   IsOwned="False"
                                                   InvokeActionOnlyWhenWindowIsActive="False"/>
         </l:InteractionMessageTrigger>

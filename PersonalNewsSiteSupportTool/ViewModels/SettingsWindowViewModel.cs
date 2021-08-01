@@ -149,9 +149,20 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
         private readonly MainWindowModel mainWindow;
 
-        public SettingsWindowViewModel(MainWindowModel viewModel)
+        private SettingsWindowViewModel(MainWindowModel viewModel)
         {
             mainWindow = viewModel;
+        }
+
+        private static SettingsWindowViewModel instance = null;
+
+        public static SettingsWindowViewModel GetInstance(MainWindowModel viewModel)
+        {
+            if(instance == null)
+            {
+                instance = new SettingsWindowViewModel(viewModel);
+            }
+            return instance;
         }
 
         // This method would be called from View, when ContentRendered event was raised.
