@@ -55,6 +55,7 @@ namespace PersonalNewsSiteSupportTool.Models
         public string SavePath { get; set; } = "";
         public string OutFilePrefix { get; set; } = "";
         public string OutFileSuffix { get; set; } = "";
+        public string MergeFileName { get; set; } = "";
         public string NewLine { get; set; } = "\r\n";
         public string CategoryPrefix { get; set; } = "";
         public string CategorySuffix { get; set; } = "";

@@ -75,6 +75,21 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         }
 
 
+        private string mergeFileName;
+
+        public string MergeFileName
+        {
+            get => mergeFileName;
+            set
+            {
+                if (!CommonUtil.ValidateFileName(value))
+                {
+                    ShowErrorMessage($"結合ファイル名にファイルに含められない文字列({CommonUtil.CANNOT_USED_FILE_NAME})が含まれています。");
+                }
+                RaisePropertyChangedIfSet(ref mergeFileName, value);
+            }
+        }
+
         private NewLineItem newLine;
 
         public NewLineItem NewLine
@@ -183,6 +198,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             SavePath = config.SavePath;
             OutFilePrefix = config.OutFilePrefix;
             OutFileSuffix = config.OutFileSuffix;
+            MergeFileName = config.MergeFileName;
             NewLineCode = config.NewLine;
             CategoryPrefix = config.CategoryPrefix;
             CategorySuffix = config.CategorySuffix;
@@ -288,6 +304,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             config.SavePath = SavePath;
             config.OutFilePrefix = OutFilePrefix;
             config.OutFileSuffix = OutFileSuffix;
+            config.MergeFileName = MergeFileName;
             config.NewLine = NewLineCode;
             config.CategoryPrefix = CategoryPrefix;
             config.CategorySuffix = CategorySuffix;
