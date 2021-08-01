@@ -63,7 +63,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         private void CompleteAction()
         {
 
-            if (CategoryId == null | "".Equals(CategoryId, StringComparison.Ordinal))
+            if (Categories.Count != 0 & (CategoryId == null | "".Equals(CategoryId, StringComparison.Ordinal)))
             {
                 ShowInfoMessage("カテゴリが選択されていません。");
             }
@@ -175,7 +175,14 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     }
                     mainWindow.Show();
                     mainWindow.WindowState = WindowState.Normal;
-                    CategoryId = null;
+                    if (Categories.Count == 1)
+                    {
+                        CategoryId = Categories[0].Id;
+                    }
+                    else
+                    {
+                        CategoryId = null;
+                    }
                     NewsUrl = cbText;
                     // テキストボックス欄にフォーカスがあった場合、VMの値が更新されておらず
                     // 値が変更されていない扱いとなることがあるため強制的にプロパティ変更通知を行う。
