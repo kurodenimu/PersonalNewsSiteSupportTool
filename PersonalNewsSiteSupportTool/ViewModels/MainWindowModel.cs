@@ -143,7 +143,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             string outText = "";
             foreach (var kvp in config.Categories)
             {
-                string fullPath = $"{savePath}news_{kvp.Key}.txt";
+                string fullPath = $"{savePath}{config.OutFilePrefix}{kvp.Key}{config.OutFileSuffix}";
                 if (File.Exists(fullPath))
                 {
                     outText += $"{config.CategoryPrefix}{kvp.Value}{newLine}{newLine}";
@@ -151,7 +151,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 }
             }
 
-            OverwriteTextFile(savePath, "news.txt", outText);
+            _ = OverwriteTextFile(savePath, config.MergeFileName, outText);
         }
 
 
