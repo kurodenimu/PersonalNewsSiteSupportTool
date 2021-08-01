@@ -17,6 +17,7 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Label Content="監視する単語" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+        <CheckBox Content="監視する単語の削除" HorizontalAlignment="Left" Margin="229,16,0,0" VerticalAlignment="Top" IsChecked="{Binding IsRemoveWatchWord}"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="92,14,0,0" TextWrapping="Wrap" Text="{Binding WatchWord}" VerticalAlignment="Top" Width="120"/>
         <GroupBox Header="保存" HorizontalAlignment="Left" Height="215" Margin="10,42,0,0" VerticalAlignment="Top" Width="374">
             <Grid>

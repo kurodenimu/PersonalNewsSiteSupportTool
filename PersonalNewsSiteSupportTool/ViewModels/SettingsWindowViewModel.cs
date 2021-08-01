@@ -34,6 +34,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+
+        private bool isRemoveWatchWord;
+
+        public bool IsRemoveWatchWord
+        {
+            get => isRemoveWatchWord;
+            set => RaisePropertyChangedIfSet(ref isRemoveWatchWord, value);
+        }
+
         private string savePath;
 
         public string SavePath
@@ -195,6 +204,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
             var config = ConfigManager.Config;
             WatchWord = config.WatchWord;
+            IsRemoveWatchWord = config.IsRemoveWatchWord;
             SavePath = config.SavePath;
             OutFilePrefix = config.OutFilePrefix;
             OutFileSuffix = config.OutFileSuffix;
@@ -301,6 +311,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         private void UpdateConfig(Config config)
         {
             config.WatchWord = WatchWord;
+            config.IsRemoveWatchWord = IsRemoveWatchWord;
             config.SavePath = SavePath;
             config.OutFilePrefix = OutFilePrefix;
             config.OutFileSuffix = OutFileSuffix;
