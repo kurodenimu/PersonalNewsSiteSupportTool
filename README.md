@@ -1,3 +1,5 @@
+[![MSBuild](https://github.com/kurodenimu/PersonalNewsSiteSupportTool/actions/workflows/ci.yaml/badge.svg)](https://github.com/kurodenimu/PersonalNewsSiteSupportTool/actions/workflows/ci.yaml)
+
 # PersonalNewsSiteSupportTool
 個人ニュースサイトの更新を支援するツールです。
 
