@@ -161,7 +161,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
 
             if (Clipboard.ContainsText())
             {
-                String cbText = Clipboard.GetText();
+                String cbText = ClipboardWrapper.GetText();
+                if (string.IsNullOrEmpty(cbText))
+                {
+                    // クリップボードからテキストが取得できなかった場合、何もせずにメソッドを終了する。
+                    return;
+                }
                 Config config = ConfigManager.Config;
                 if (cbText.StartsWith(config.WatchWord, StringComparison.Ordinal))
                 {

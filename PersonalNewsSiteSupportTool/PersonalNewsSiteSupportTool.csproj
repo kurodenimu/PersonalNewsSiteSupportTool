@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ClipboardWrapper.cs" />
     <Compile Include="Models\CommonUtil.cs" />
     <Compile Include="Models\PathConstant.cs" />
     <Compile Include="ViewModels\OutTextPreviewViewModel.cs" />

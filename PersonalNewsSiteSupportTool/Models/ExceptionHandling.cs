@@ -28,8 +28,8 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             string errorMember = GetTargetSiteName(e.Exception);
             string errorMessage = e.Exception.Message;
-            string message = string.Format(@"UnhandledException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
-                                      errorMember, errorMessage, e.Exception.StackTrace);
+            string message = string.Format(@"UnhandledException occurred：{0}. ErrorMessage：{1}, Type：{2}\r\nStackTrace：{3}",
+                                      errorMember, errorMessage, e.Exception.GetType().FullName, e.Exception.StackTrace);
             LogService.ErrorLog(message);
         }
 
@@ -37,8 +37,8 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             string errorMember = GetTargetSiteName(e.Exception);
             string errorMessage = e.Exception.Message;
-            string message = string.Format(@"Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
-                                      errorMember, errorMessage, e.Exception.StackTrace);
+            string message = string.Format(@"Exception occurred：{0}. ErrorMessage：{1}, Type：{2}\r\nStackTrace：{3}",
+                                      errorMember, errorMessage, e.Exception.GetType().FullName, e.Exception.StackTrace);
             LogService.ErrorLog(message);
         }
 
@@ -56,8 +56,8 @@ namespace PersonalNewsSiteSupportTool.Models
             {
                 errorMember = GetTargetSiteName(exception);
                 errorMessage = exception.Message;
-                message = string.Format(@"Unhandled Exception occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
-                                          errorMember, errorMessage, exception.StackTrace);
+                message = string.Format(@"Unhandled Exception occurred：{0}. ErrorMessage：{1}, Type：{2}\r\nStackTrace：{3}",
+                                          errorMember, errorMessage, exception.GetType().FullName, exception.StackTrace);
             }
             LogService.ErrorLog(message);
         }
@@ -66,8 +66,8 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             string errorMember = GetTargetSiteName(e.Exception);
             string errorMessage = e.Exception.Message;
-            string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}, StackTrace：{2}",
-                                      errorMember, errorMessage, e.Exception.StackTrace);
+            string message = string.Format(@"UnobservedTaskException occurred：{0}. ErrorMessage：{1}, Type：{2}\r\nStackTrace：{3}",
+                                      errorMember, errorMessage, e.Exception.GetType().FullName, e.Exception.StackTrace);
             LogService.ErrorLog(message);
         }
 
