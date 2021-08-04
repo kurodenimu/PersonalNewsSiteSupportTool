@@ -1,4 +1,5 @@
-﻿using Livet.Commands;
+﻿using Livet;
+using Livet.Commands;
 using Livet.Messaging;
 using PersonalNewsSiteSupportTool.Behaviors;
 using PersonalNewsSiteSupportTool.Models;
@@ -289,6 +290,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        private bool isCatEnabled;
+
+        public bool IsCatEnabled
+        {
+            get => isCatEnabled;
+            set => RaisePropertyChangedIfSet(ref isCatEnabled, value);
+        }
+
+
         private bool AppendTextFile(string folder, string fileName, string outText)
         {
             try
@@ -387,6 +397,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });
             }
             this.NotifyPropertyChanged(nameof(InformationSources));
+
+            // 結合コマンドの有効無効
+            IsCatEnabled = !string.IsNullOrEmpty(config.MergeFileName);
         }
     }
 }
