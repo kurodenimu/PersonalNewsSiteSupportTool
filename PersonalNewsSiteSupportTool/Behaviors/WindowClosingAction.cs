@@ -4,6 +4,9 @@ using System.Windows;
 
 namespace PersonalNewsSiteSupportTool.Behaviors
 {
+    /// <summary>
+    /// MainWindowが閉じたときに呼ばれるAction。
+    /// </summary>
     class WindowClosingAction : TriggerAction<Window>
     {
         protected override void Invoke(object parameter)

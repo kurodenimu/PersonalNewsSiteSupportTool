@@ -4,10 +4,19 @@ using System.Windows;
 
 namespace PersonalNewsSiteSupportTool.Models
 {
+    /// <summary>
+    /// 例外ハンドリングクラス。
+    /// </summary>
     public static class ExceptionHandling
     {
+        /// <summary>
+        /// 初期化フラグ。
+        /// </summary>
         private static bool initFlag = false;
 
+        /// <summary>
+        /// 初期化メソッド。
+        /// </summary>
         public static void Init()
         {
             if (!initFlag)
@@ -24,6 +33,11 @@ namespace PersonalNewsSiteSupportTool.Models
             }
         }
 
+        /// <summary>
+        ///  未処理例外発生時のメソッド。
+        /// </summary>
+        /// <param name="sender">イベントを発生させたオブジェクト</param>
+        /// <param name="e">発生したイベント</param>
         private static void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             string errorMember = GetTargetSiteName(e.Exception);
@@ -33,6 +47,11 @@ namespace PersonalNewsSiteSupportTool.Models
             LogService.ErrorLog(message);
         }
 
+        /// <summary>
+        /// マネージコード内で発生した例外が発生した時にトラップするメソッド。
+        /// </summary>
+        /// <param name="sender">イベントを発生させたオブジェクト</param>
+        /// <param name="e">発生したイベント</param>
         private static void App_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
             string errorMember = GetTargetSiteName(e.Exception);
@@ -42,6 +61,11 @@ namespace PersonalNewsSiteSupportTool.Models
             LogService.ErrorLog(message);
         }
 
+        /// <summary>
+        /// 未処理例外発生時（アプリ全体）のメソッド
+        /// </summary>
+        /// <param name="sender">イベントを発生させたオブジェクト</param>
+        /// <param name="e">発生したイベント</param>
         private static void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             string errorMember;
@@ -62,6 +86,11 @@ namespace PersonalNewsSiteSupportTool.Models
             LogService.ErrorLog(message);
         }
 
+        /// <summary>
+        /// バックグラウンドタスクで発生した未処理例外を処理するメソッド。
+        /// </summary>
+        /// <param name="sender">イベントを発生させたオブジェクト</param>
+        /// <param name="e">発生したイベント</param>
         private static void App_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             string errorMember = GetTargetSiteName(e.Exception);
@@ -71,6 +100,11 @@ namespace PersonalNewsSiteSupportTool.Models
             LogService.ErrorLog(message);
         }
 
+        /// <summary>
+        /// Exceptionが発生したメソッドの名前を取得。
+        /// </summary>
+        /// <param name="exception">例外</param>
+        /// <returns>メソッド名。取得できない場合は空文字を返却。</returns>
         private static string GetTargetSiteName(Exception exception)
         {
             string ret = "";

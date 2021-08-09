@@ -15,13 +15,25 @@ using System.Text;
 
 namespace PersonalNewsSiteSupportTool.ViewModels
 {
+    /// <summary>
+    /// 設定ウィンドウのViewModel
+    /// </summary>
     class SettingsWindowViewModel : ViewModelBase
     {
         // Some useful code snippets for ViewModel are defined as l*(llcom, llcomn, lvcomm, lsprop, etc...).
+        /// <summary>
+        /// 変更前の設定
+        /// </summary>
         private Config beforeConfig;
 
+        /// <summary>
+        /// 監視文言
+        /// </summary>
         private string watchWord;
 
+        /// <summary>
+        /// 監視文言
+        /// </summary>
         public string WatchWord
         {
             get => watchWord;
@@ -34,26 +46,42 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// 監視文言の除去有無
+        /// </summary>
         private bool isRemoveWatchWord;
 
+        /// <summary>
+        /// 監視文言の除去有無
+        /// </summary>
         public bool IsRemoveWatchWord
         {
             get => isRemoveWatchWord;
             set => RaisePropertyChangedIfSet(ref isRemoveWatchWord, value);
         }
 
+        /// <summary>
+        /// 保存先パス
+        /// </summary>
         private string savePath;
 
+        /// <summary>
+        /// 保存先パス
+        /// </summary>
         public string SavePath
         {
             get => savePath;
             set => RaisePropertyChangedIfSet(ref savePath, value);
         }
 
-
+        /// <summary>
+        /// 出力ファイル接頭辞
+        /// </summary>
         private string outFilePrefix;
 
+        /// <summary>
+        /// 出力ファイル接頭辞
+        /// </summary>
         public string OutFilePrefix
         {
             get => outFilePrefix;
@@ -67,9 +95,14 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// 出力ファイル接尾辞
+        /// </summary>
         private string outFileSuffix;
 
+        /// <summary>
+        /// 出力ファイル接尾辞
+        /// </summary>
         public string OutFileSuffix
         {
             get => outFileSuffix;
@@ -83,9 +116,14 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// 結合ファイル名
+        /// </summary>
         private string mergeFileName;
 
+        /// <summary>
+        /// 結合ファイル名
+        /// </summary>
         public string MergeFileName
         {
             get => mergeFileName;
@@ -99,69 +137,120 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        /// <summary>
+        /// 改行
+        /// </summary>
         private NewLineItem newLine;
 
+        /// <summary>
+        /// 改行
+        /// </summary>
         public NewLineItem NewLine
         {
             get => newLine;
             set => RaisePropertyChangedIfSet(ref newLine, value);
         }
 
-
+        /// <summary>
+        /// 改行コード
+        /// </summary>
         private string newLineCode;
 
+        /// <summary>
+        /// 改行コード
+        /// </summary>
         public string NewLineCode
         {
             get => newLineCode;
             set => RaisePropertyChangedIfSet(ref newLineCode, value);
         }
 
-
+        /// <summary>
+        /// カテゴリ接頭辞
+        /// </summary>
         private string categoryPrefix;
 
+        /// <summary>
+        /// カテゴリ接頭辞
+        /// </summary>
         public string CategoryPrefix
         {
             get => categoryPrefix;
             set => RaisePropertyChangedIfSet(ref categoryPrefix, value);
         }
 
-
+        /// <summary>
+        /// カテゴリ接尾辞
+        /// </summary>
         private string categorySuffix;
 
+        /// <summary>
+        /// カテゴリ接尾辞
+        /// </summary>
         public string CategorySuffix
         {
             get => categorySuffix;
             set => RaisePropertyChangedIfSet(ref categorySuffix, value);
         }
 
-
+        /// <summary>
+        /// 情報元接頭辞
+        /// </summary>
         private string viaPrefix;
 
+        /// <summary>
+        /// 情報元接頭辞
+        /// </summary>
         public string ViaPrefix
         {
             get => viaPrefix;
             set => RaisePropertyChangedIfSet(ref viaPrefix, value);
         }
 
-
+        /// <summary>
+        /// 情報接尾辞
+        /// </summary>
         private string viaSuffix;
 
+        /// <summary>
+        /// 情報接尾辞
+        /// </summary>
         public string ViaSuffix
         {
             get => viaSuffix;
             set => RaisePropertyChangedIfSet(ref viaSuffix, value);
         }
 
+        /// <summary>
+        /// カテゴリリスト
+        /// </summary>
         public ObservableCollection<Category> Categories { get; set; }
 
+        /// <summary>
+        /// 情報元リスト
+        /// </summary>
         public ObservableCollection<InformationSource> InformationSources { get; set; }
 
+        /// <summary>
+        /// 改行クラス
+        /// </summary>
         public class NewLineItem
         {
+            /// <summary>
+            /// 改行コード表示名
+            /// </summary>
             public string Name { get; set; }
 
+            /// <summary>
+            /// 改行コード
+            /// </summary>
             public string Code { get; set; }
 
+            /// <summary>
+            /// コンストラクタ
+            /// </summary>
+            /// <param name="name">改行コード表示名</param>
+            /// <param name="code">改行コード</param>
             public NewLineItem(string name, string code)
             {
                 this.Name = name;
@@ -169,17 +258,39 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        /// <summary>
+        /// 改行リスト
+        /// </summary>
         public ObservableCollection<NewLineItem> NewLines { get; set; }
 
+        /// <summary>
+        /// 親ウィンドウ
+        /// </summary>
         private readonly MainWindowModel mainWindow;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="viewModel">親ウィンドウ</param>
         private SettingsWindowViewModel(MainWindowModel viewModel)
         {
             mainWindow = viewModel;
+            // コマンドの設定
+            SaveCommand = new ViewModelCommand(SaveDo);
+            CancelCommand = new ViewModelCommand(Cancel);
+            PreviewCommand = new ViewModelCommand(Preview);
         }
 
+        /// <summary>
+        /// 自クラスインスタンス
+        /// </summary>
         private static SettingsWindowViewModel instance = null;
 
+        /// <summary>
+        /// インスタンス取得
+        /// </summary>
+        /// <param name="viewModel">親ウィンドウ</param>
+        /// <returns>インスタンス</returns>
         public static SettingsWindowViewModel GetInstance(MainWindowModel viewModel)
         {
             if(instance == null)
@@ -190,6 +301,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         }
 
         // This method would be called from View, when ContentRendered event was raised.
+        /// <summary>
+        /// 初期化
+        /// </summary>
         public void Initialize()
         {
             NewLines = new ObservableCollection<NewLineItem>
@@ -232,20 +346,14 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(InformationSources));
         }
 
-        private ViewModelCommand saveCommand;
+        /// <summary>
+        /// 保存ボタン押下時のコマンド
+        /// </summary>
+        public ViewModelCommand SaveCommand { get; private set; }
 
-        public ViewModelCommand SaveCommand
-        {
-            get
-            {
-                if (saveCommand == null)
-                {
-                    saveCommand = new ViewModelCommand(SaveDo);
-                }
-                return saveCommand;
-            }
-        }
-
+        /// <summary>
+        /// 保存ボタン押下時の処理
+        /// </summary>
         public void SaveDo()
         {
             if (!Validate())
@@ -267,40 +375,27 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
 
+        /// <summary>
+        /// キャンセルボタン押下時のコマンド
+        /// </summary>
+        public ViewModelCommand CancelCommand { get; private set; }
 
-        private ViewModelCommand cancelCommand;
-
-        public ViewModelCommand CancelCommand
-        {
-            get
-            {
-                if (cancelCommand == null)
-                {
-                    cancelCommand = new ViewModelCommand(Cancel);
-                }
-                return cancelCommand;
-            }
-        }
-
+        /// <summary>
+        /// キャンセルボタン押下時の処理
+        /// </summary>
         public void Cancel()
         {
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
 
-        private ViewModelCommand previewCommand;
+        /// <summary>
+        /// プレビューボタン押下時のコマンド
+        /// </summary>
+        public ViewModelCommand PreviewCommand { get; private set; }
 
-        public ViewModelCommand PreviewCommand
-        {
-            get
-            {
-                if (previewCommand == null)
-                {
-                    previewCommand = new ViewModelCommand(Preview);
-                }
-                return previewCommand;
-            }
-        }
-
+        /// <summary>
+        /// プレビューボタン押下時の処理
+        /// </summary>
         public void Preview()
         {
             var config = ConfigManager.GetCopyConfig();
@@ -308,6 +403,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             Messenger.Raise(new TransitionMessage(new OutTextPreviewViewModel(config), "Preview"));
         }
 
+        /// <summary>
+        /// 引数に渡された設定を入力された内容で更新する。
+        /// </summary>
+        /// <param name="config">更新対象の設定クラス</param>
         private void UpdateConfig(Config config)
         {
             config.WatchWord = WatchWord;
@@ -335,6 +434,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        /// <summary>
+        /// チェック処理
+        /// </summary>
+        /// <returns></returns>
         private bool Validate()
         {
             // 監視する単語

@@ -13,40 +13,95 @@ using System.Windows.Interop;
 
 namespace PersonalNewsSiteSupportTool.ViewModels
 {
+    /// <summary>
+    /// MainWindowのViewModel
+    /// </summary>
     class MainWindowModel : ViewModelBase
     {
-
+        /// <summary>
+        /// MainWindowがロードされたときに実行されるコマンド
+        /// </summary>
         public ViewModelCommand LoadedCommand { get; private set; }
 
+        /// <summary>
+        /// 終了メニューを押下した時に実行されるコマンド
+        /// </summary>
+        public ViewModelCommand ExitCommand { get; private set; }
+
+        /// <summary>
+        /// 完了ボタン押下時に実行されるコマンド
+        /// </summary>
         public ViewModelCommand CompleteButtonClick { get; private set; }
 
+        /// <summary>
+        /// 結合メニュー押下時に実行されるコマンド
+        /// </summary>
+        public ViewModelCommand CatCommand { get; private set; }
+
+        /// <summary>
+        /// 設定メニューを押下した時に実行されるコマンド
+        /// </summary>
         public ViewModelCommand OpenSettingsCommand { get; private set; }
 
+        /// <summary>
+        /// カテゴリーリスト
+        /// </summary>
         public ObservableCollection<Category> Categories { get; set; }
 
+        /// <summary>
+        /// 情報元リスト
+        /// </summary>
         public ObservableCollection<InformationSource> InformationSources { get; set; }
 
+        /// <summary>
+        /// クリップボード監視クラス
+        /// </summary>
         ClipboardWatcher clipboardWatcher;
 
+        /// <summary>
+        /// カテゴリID
+        /// </summary>
         private string categoryId;
 
+        /// <summary>
+        /// ニュースURL
+        /// </summary>
         private string newsUrl;
 
+        /// <summary>
+        /// 情報元
+        /// </summary>
         private string via;
 
+        /// <summary>
+        /// 情報元編集可否
+        /// </summary>
         private bool isViaEditabled;
 
+        /// <summary>
+        /// ニュースコメント
+        /// </summary>
         private string newsComment;
 
+        /// <summary>
+        /// コンストラクタ。1回しか呼ばれないのでアプリ内の初期化を兼ねている。
+        /// </summary>
         public MainWindowModel()
         {
             LogService.Init();
             LoadedCommand = new ViewModelCommand(LoadedAction);
             CompleteButtonClick = new ViewModelCommand(CompleteAction);
+            CatCommand = new ViewModelCommand(Cat, CanCat);
             OpenSettingsCommand = new ViewModelCommand(OpenSettings);
+            ExitCommand = new ViewModelCommand(Exit);
             ExceptionHandling.Init();
         }
 
+        /// <summary>
+        /// MainWindowがロードされた時の処理。
+        /// クリップボード監視クラスの初期化をここで行うのはウィンドウハンドルが必要なため。
+        /// コンフィグの読み込みがこのタイミングなのは設定の内容をMainWindowに反映させるため。
+        /// </summary>
         private void LoadedAction()
         {
             var mainWindow = Application.Current.MainWindow;
@@ -61,6 +116,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             ConfigLoad();
         }
 
+        /// <summary>
+        /// 完了ボタン押下時の処理
+        /// </summary>
         private void CompleteAction()
         {
 
@@ -83,30 +141,17 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        /// <summary>
+        /// 設定メニュー押下時の処理。
+        /// </summary>
         private void OpenSettings()
         {
             Messenger.Raise(new TransitionMessage(SettingsWindowViewModel.GetInstance(this), "OpenSettings"));
         }
 
-        private ViewModelCommand exitCommand;
-
-        public ViewModelCommand ExitCommand
-        {
-            get
-            {
-                if (exitCommand == null)
-                {
-                    exitCommand = new ViewModelCommand(Exit, CanExit);
-                }
-                return exitCommand;
-            }
-        }
-
-        public bool CanExit()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// 終了メニュー押下時の処理
+        /// </summary>
         public void Exit()
         {
             if (ShowConfirmMessage("終了しますか"))
@@ -116,26 +161,18 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
-
-        private ViewModelCommand catCommand;
-
-        public ViewModelCommand CatCommand
-        {
-            get
-            {
-                if (catCommand == null)
-                {
-                    catCommand = new ViewModelCommand(Cat, CanCat);
-                }
-                return catCommand;
-            }
-        }
-
+        /// <summary>
+        /// 結合コマンドの実行可否
+        /// </summary>
+        /// <returns></returns>
         public bool CanCat()
         {
             return true;
         }
 
+        /// <summary>
+        /// 結合メニューの押下時の処理
+        /// </summary>
         public void Cat()
         {
             Config config = ConfigManager.Config;
@@ -155,7 +192,11 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             _ = OverwriteTextFile(savePath, config.MergeFileName, outText);
         }
 
-
+        /// <summary>
+        /// クリップボードに変化があった時の処理
+        /// </summary>
+        /// <param name="sender">イベントの送信元</param>
+        /// <param name="e">イベント</param>
         private void ClipboardWatcher_DrawClipboard(object sender, EventArgs e)
         {
             var mainWindow = Application.Current.MainWindow;
@@ -198,7 +239,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                     {
                         NewsUrl = cbText;
                     }
-                    
+
                     // テキストボックス欄にフォーカスがあった場合、VMの値が更新されておらず
                     // 値が変更されていない扱いとなることがあるため強制的にプロパティ変更通知を行う。
                     via = "";
@@ -211,94 +252,89 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
         }
 
+        /// <summary>
+        /// カテゴリID
+        /// </summary>
         public String CategoryId
         {
             get => categoryId;
-            set
-            {
-                if (categoryId != value)
-                {
-                    categoryId = value;
-                    this.NotifyPropertyChanged(nameof(CategoryId));
-                }
-            }
+            set => RaisePropertyChangedIfSet(ref categoryId, value);
         }
 
+        /// <summary>
+        /// ニュースURL
+        /// </summary>
         public String NewsUrl
         {
             get => newsUrl;
-            set
-            {
-                if (newsUrl != value)
-                {
-                    newsUrl = value;
-                    this.NotifyPropertyChanged(nameof(NewsUrl));
-                }
-            }
+            set => RaisePropertyChangedIfSet(ref newsUrl, value);
         }
 
+        /// <summary>
+        /// 情報元
+        /// </summary>
         public String Via
         {
             get => via;
             set
             {
-                if (via != value)
+                RaisePropertyChangedIfSet(ref via, value);
+                if (via == null | "".Equals(via, StringComparison.Ordinal))
                 {
-                    via = value;
-                    this.NotifyPropertyChanged(nameof(Via));
-
-                    if (via == null | "".Equals(via, StringComparison.Ordinal))
+                    IsViaEditabled = true;
+                }
+                else
+                {
+                    foreach (var informationSource in this.InformationSources)
                     {
-                        IsViaEditabled = true;
-                    }
-                    else
-                    {
-                        foreach (var informationSource in this.InformationSources) {
-                            if (via == informationSource.Data)
-                            {
-                                IsViaEditabled = false;
-                            }
+                        if (via == informationSource.Data)
+                        {
+                            IsViaEditabled = false;
                         }
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// 情報元編集可否
+        /// </summary>
         public bool IsViaEditabled
         {
             get => isViaEditabled;
-            set
-            {
-                if (isViaEditabled != value)
-                {
-                    isViaEditabled = value;
-                    this.NotifyPropertyChanged(nameof(IsViaEditabled));
-                }
-            }
+            set => RaisePropertyChangedIfSet(ref isViaEditabled, value);
         }
 
+        /// <summary>
+        /// ニュースコメント
+        /// </summary>
         public String NewsComment
         {
             get => newsComment;
-            set
-            {
-                if (newsComment != value)
-                {
-                    newsComment = value;
-                    this.NotifyPropertyChanged(nameof(NewsComment));
-                }
-            }
+            set => RaisePropertyChangedIfSet(ref newsComment, value);
         }
 
+        /// <summary>
+        /// 結合可否
+        /// </summary>
         private bool isCatEnabled;
 
+        /// <summary>
+        /// 結合可否
+        /// </summary>
         public bool IsCatEnabled
         {
             get => isCatEnabled;
             set => RaisePropertyChangedIfSet(ref isCatEnabled, value);
         }
 
-
+        /// <summary>
+        /// テキストファイルへの追記
+        /// </summary>
+        /// <param name="folder">出力するファイルのフォルダ</param>
+        /// <param name="fileName">出力するファイル名</param>
+        /// <param name="outText">出力する内容</param>
+        /// <returns>追記の成否</returns>
         private bool AppendTextFile(string folder, string fileName, string outText)
         {
             try
@@ -332,6 +368,13 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             return true;
         }
 
+        /// <summary>
+        /// テキストの出力（上書き）
+        /// </summary>
+        /// <param name="folder">出力するファイルのフォルダ</param>
+        /// <param name="fileName">出力するファイル名</param>
+        /// <param name="outText">出力する内容</param>
+        /// <returns>出力の成否</returns>
         private bool OverwriteTextFile(string folder, string fileName, string outText)
         {
             if (File.Exists($"{folder}{fileName}"))
@@ -372,6 +415,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             return true;
         }
 
+        /// <summary>
+        /// 設定読込メソッド。
+        /// </summary>
         public void ConfigLoad()
         {
             // 設定を読み込む時のメソッド。
