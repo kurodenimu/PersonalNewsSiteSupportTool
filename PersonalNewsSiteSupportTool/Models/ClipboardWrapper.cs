@@ -7,8 +7,15 @@ using System.Windows;
 
 namespace PersonalNewsSiteSupportTool.Models
 {
+    /// <summary>
+    /// Clipboardのラッパークラス。
+    /// </summary>
     class ClipboardWrapper
     {
+        /// <summary>
+        /// クリップボードのテキストを取得するメソッド。クリップボードにアクセスできない場合にリトライを行う。
+        /// </summary>
+        /// <returns>クリップボード内のテキスト。クリップボードにアクセスできない場合、クリップボード内がテキストじゃない場合に空文字を返却する。</returns>
         public static string GetText()
         {
             string ret = "";

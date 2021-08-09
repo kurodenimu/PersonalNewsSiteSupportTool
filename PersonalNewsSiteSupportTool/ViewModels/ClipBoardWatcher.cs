@@ -4,15 +4,30 @@ using System.Windows.Interop;
 
 namespace PersonalNewsSiteSupportTool.ViewModels
 {
+    /// <summary>
+    /// クリップボード監視クラス。
+    /// </summary>
     public class ClipboardWatcher
     {
 
-        // クリップボードが変更された時のメッセージコード
+        /// <summary>
+        /// クリップボードが変更された時のメッセージコード
+        /// </summary>
         private const int WM_CLIPBOARDUPDATE = 0x031D;
+
+        /// <summary>
+        /// ウィンドウハンドル
+        /// </summary>
         private readonly IntPtr handle;
+
+        /// <summary>
+        /// WPFからWin32APIにアクセスするためのハンドル。
+        /// </summary>
         private readonly HwndSource hwndSource;
 
-
+        /// <summary>
+        /// クリップボード更新イベントハンドラー
+        /// </summary>
         public event EventHandler UpdateClipboard;
         //イベント起動
         private void RaiseUpdateClipboard()
@@ -23,12 +38,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <summary>
         /// ウィンドウプロシージャー。
         /// </summary>
-        /// <param name="hwnd"></param>
-        /// <param name="msg"></param>
-        /// <param name="wParam"></param>
-        /// <param name="lParam"></param>
-        /// <param name="handled"></param>
-        /// <returns></returns>
+        /// <param name="hwnd">ウィンドウハンドル</param>
+        /// <param name="msg">メッセージ</param>
+        /// <param name="wParam">メッセージ固有の付加情報</param>
+        /// <param name="lParam">メッセージ固有の付加情報</param>
+        /// <param name="handled">ハンドルフラグ</param>
+        /// <returns>メッセージを処理した結果</returns>
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == WM_CLIPBOARDUPDATE)
@@ -51,15 +66,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             hwndSource.AddHook(WndProc);
             this.handle = handle;
         }
-        //クリップボード監視開始
+        ///<summary>クリップボード監視開始</summary>
         public void Start()
         {
-            NativeMethods.AddClipboardFormatListener(handle);
+            _ = NativeMethods.AddClipboardFormatListener(handle);
         }
-        //クリップボード監視停止
+        ///<summary>クリップボード監視停止</summary>
         public void Stop()
         {
-            NativeMethods.RemoveClipboardFormatListener(handle);
+            _ = NativeMethods.RemoveClipboardFormatListener(handle);
         }
     }
 
