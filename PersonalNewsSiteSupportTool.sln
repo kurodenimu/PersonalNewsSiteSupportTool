@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{613B79BA-F4E1-488B-B5F2-B5519EA7CAD2}"
 	ProjectSection(SolutionItems) = preProject
 		docs\.nojekyll = docs\.nojekyll
+		index.html = index.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dev", "dev", "{BD3942A5-7CC0-4D67-9DA5-BF9285BE56FA}"
@@ -32,6 +33,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{80D441BA-0474-49B9-A24C-A82E0CA6650C}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\ci.yaml = .github\workflows\ci.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{866635A1-430A-4B12-8294-EAF9015202D9}"
+	ProjectSection(SolutionItems) = preProject
+		docs\css\destyle.css = docs\css\destyle.css
+		style.css = style.css
 	EndProjectSection
 EndProject
 Global
@@ -71,6 +78,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BD3942A5-7CC0-4D67-9DA5-BF9285BE56FA} = {613B79BA-F4E1-488B-B5F2-B5519EA7CAD2}
 		{80D441BA-0474-49B9-A24C-A82E0CA6650C} = {120C51C5-5C6F-4462-B372-9BC5108FF2FB}
+		{866635A1-430A-4B12-8294-EAF9015202D9} = {613B79BA-F4E1-488B-B5F2-B5519EA7CAD2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06A5C38B-8565-40D3-8FC0-3C4795EA0B81}
