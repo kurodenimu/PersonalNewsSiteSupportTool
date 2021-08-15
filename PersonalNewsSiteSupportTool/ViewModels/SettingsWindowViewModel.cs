@@ -229,7 +229,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <summary>
         /// 情報元リスト
         /// </summary>
-        public ObservableCollection<InformationSource> InformationSources { get; set; }
+        public ObservableCollection<Via> ViaList { get; set; }
 
         /// <summary>
         /// 改行クラス
@@ -338,12 +338,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(Categories));
 
             // 情報元設定
-            this.InformationSources = new ObservableCollection<InformationSource>();
-            foreach (var kvp in config.InformationSources)
+            this.ViaList = new ObservableCollection<Via>();
+            foreach (var kvp in config.ViaList)
             {
-                this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });
+                this.ViaList.Add(new Via() { Name = kvp.Value, Data = kvp.Key });
             }
-            this.NotifyPropertyChanged(nameof(InformationSources));
+            this.NotifyPropertyChanged(nameof(ViaList));
         }
 
         /// <summary>
@@ -427,10 +427,10 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 config.Categories.Add(new KeyValuePair<string, string>(category.Id, category.Name));
             }
             // 情報元
-            config.InformationSources.Clear();
-            foreach (var informationSource in this.InformationSources)
+            config.ViaList.Clear();
+            foreach (var via in this.ViaList)
             {
-                config.InformationSources.Add(new KeyValuePair<string, string>(informationSource.Data, informationSource.Name));
+                config.ViaList.Add(new KeyValuePair<string, string>(via.Data, via.Name));
             }
         }
 

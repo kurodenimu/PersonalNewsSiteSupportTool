@@ -72,6 +72,7 @@
     <Compile Include="Models\PathConstant.cs" />
     <Compile Include="ViewModels\OutTextPreviewViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Compile Include="ViewModels\Via.cs" />
     <Compile Include="Views\OutTextPreview.xaml.cs">
       <DependentUpon>OutTextPreview.xaml</DependentUpon>
     </Compile>
@@ -91,7 +92,6 @@
     <Compile Include="Models\LogService.cs" />
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\ClipBoardWatcher.cs" />
-    <Compile Include="ViewModels\InformationSource.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Behaviors\WindowClosingAction.cs" />

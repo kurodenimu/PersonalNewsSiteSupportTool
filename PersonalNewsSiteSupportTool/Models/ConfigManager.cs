@@ -95,6 +95,6 @@ namespace PersonalNewsSiteSupportTool.Models
 
         public List<KeyValuePair<String, String>> Categories { get; set; }
         
-        public List<KeyValuePair<String, String>> InformationSources { get; set; }
+        public List<KeyValuePair<String, String>> ViaList { get; set; }
     }
 }

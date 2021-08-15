@@ -51,7 +51,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <summary>
         /// 情報元リスト
         /// </summary>
-        public ObservableCollection<InformationSource> InformationSources { get; set; }
+        public ObservableCollection<Via> ViaList { get; set; }
 
         /// <summary>
         /// クリップボード監視クラス
@@ -285,9 +285,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 }
                 else
                 {
-                    foreach (var informationSource in this.InformationSources)
+                    foreach (var via in this.ViaList)
                     {
-                        if (via == informationSource.Data)
+                        if (this.via == via.Data)
                         {
                             IsViaEditabled = false;
                         }
@@ -434,15 +434,15 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             this.NotifyPropertyChanged(nameof(Categories));
 
             // 情報元設定
-            this.InformationSources = new ObservableCollection<InformationSource>
+            this.ViaList = new ObservableCollection<Via>
             {
-                new InformationSource() { Name = "自分で入力", Data = "" }
+                new Via() { Name = "自分で入力", Data = "" }
             };
-            foreach (var kvp in config.InformationSources)
+            foreach (var kvp in config.ViaList)
             {
-                this.InformationSources.Add(new InformationSource() { Name = kvp.Value, Data = kvp.Key });
+                this.ViaList.Add(new Via() { Name = kvp.Value, Data = kvp.Key });
             }
-            this.NotifyPropertyChanged(nameof(InformationSources));
+            this.NotifyPropertyChanged(nameof(ViaList));
 
             // 結合コマンドの有効無効
             IsCatEnabled = !string.IsNullOrEmpty(config.MergeFileName);
