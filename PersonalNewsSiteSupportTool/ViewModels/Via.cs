@@ -5,7 +5,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
     /// <summary>
     /// 情報元クラス
     /// </summary>
-    class InformationSource
+    class Via
     {
         /// <summary>
         /// 情報元の表示名

@@ -52,7 +52,7 @@
                   ItemsSource="{Binding Categories}"/>
         <Label Content="情報元" Grid.Column="1" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
         <DataGrid Grid.Column="2" HorizontalAlignment="Left" Height="155" Margin="10,246,0,0" VerticalAlignment="Top" Width="376"
-                  ItemsSource="{Binding InformationSources}"/>
+                  ItemsSource="{Binding ViaList}"/>
         <Button Content="プレビュー" HorizontalAlignment="Left" Margin="310,433,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding PreviewCommand}"/>
         <Button Content="保存" Grid.Column="1" HorizontalAlignment="Left" Margin="231,433,0,0" VerticalAlignment="Top" Width="75" 
