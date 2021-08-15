@@ -8,7 +8,7 @@
         xmlns:v="clr-namespace:PersonalNewsSiteSupportTool.Views"
         xmlns:vm="clr-namespace:PersonalNewsSiteSupportTool.ViewModels"
         xmlns:b="clr-namespace:PersonalNewsSiteSupportTool.Behaviors"
-        xmlns:local="clr-namespace:PersonalNewsSiteSupportTool.Views"
+        xmlns:local="clr-namespace:PersonalNewsSiteSupportTool.Views" d:DataContext="{d:DesignInstance Type=vm:SettingsWindowViewModel}"
         mc:Ignorable="d"
         Title="設定" Height="497.115" Width="800">
     <Grid>
@@ -83,4 +83,7 @@
             <l:InformationDialogInteractionMessageAction/>
         </l:InteractionMessageTrigger>
     </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <l:WindowCloseCancelBehavior CanClose="{Binding CanClose}" />
+    </i:Interaction.Behaviors>
 </Window>

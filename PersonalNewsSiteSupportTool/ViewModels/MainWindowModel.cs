@@ -422,7 +422,12 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         {
             // 設定を読み込む時のメソッド。
             // 設定クラス再読込
-            ConfigManager.ReloadConfig();
+            if (ConfigManager.ReloadConfig())
+            {
+                ShowInfoMessage("最初に設定を行ってください。");
+                Messenger.Raise(new TransitionMessage(SettingsWindowViewModel.GetInstance(this, true), "OpenSettings"));
+                return;
+            }
             Config config = ConfigManager.Config;
 
             this.Categories = new ObservableCollection<Category>();
