@@ -4,6 +4,7 @@ using Livet.EventListeners;
 using Livet.Messaging;
 using Livet.Messaging.IO;
 using Livet.Messaging.Windows;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using PersonalNewsSiteSupportTool.Models;
 using System;
 using System.Collections.Generic;
@@ -94,8 +95,9 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             {
                 if (string.IsNullOrEmpty(value) && !isInit)
                 {
-                    RaisePropertyChangedIfSet(ref savePath, value);
+                    ShowErrorMessage("保存先パスは入力必須です。");
                 }
+                RaisePropertyChangedIfSet(ref savePath, value);
             }
         }
 
@@ -342,6 +344,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             else
             {
                 instance.isInit = isInit;
+                instance.isCloseCheck = isInit;
             }
             return instance;
         }
@@ -394,6 +397,35 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             isSaved = false;
         }
 
+
+        private ViewModelCommand savePathDialogCommand;
+
+        public ViewModelCommand SavePathDialogCommand
+        {
+            get
+            {
+                if (savePathDialogCommand == null)
+                {
+                    savePathDialogCommand = new ViewModelCommand(SavePathDialog);
+                }
+                return savePathDialogCommand;
+            }
+        }
+
+        public void SavePathDialog()
+        {
+            var dialog = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true,
+                Title = "保存先フォルダを選択してください"
+            };
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                SavePath = dialog.FileName;
+            }
+        }
+
+
         /// <summary>
         /// 保存ボタン押下時のコマンド
         /// </summary>
@@ -421,7 +453,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 mainWindow.ConfigLoad();
             }
             isSaved = true;
-            this.NotifyPropertyChanged("CanClose");
+            this.NotifyPropertyChanged(nameof(CanClose));
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
 

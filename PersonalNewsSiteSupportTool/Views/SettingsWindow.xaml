@@ -23,7 +23,8 @@
             <Grid>
                 <Label Content="保存先フォルダ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="25,41,0,0" TextWrapping="Wrap" Text="{Binding SavePath}" VerticalAlignment="Top" Width="286" Grid.ColumnSpan="2"/>
-                <Button Content="..." HorizontalAlignment="Left" Margin="316,41,0,0" VerticalAlignment="Top" Width="22"/>
+                <Button Content="..." HorizontalAlignment="Left" Margin="316,41,0,0" VerticalAlignment="Top" Width="22"
+                        Command="{Binding SavePathDialogCommand}"/>
                 <Label Content="出力ファイル名先頭" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="119,72,0,0" TextWrapping="Wrap" Text="{Binding OutFilePrefix}" VerticalAlignment="Top" Width="229"/>
                 <Label Content="出力ファイル名末尾" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
