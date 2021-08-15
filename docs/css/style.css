@@ -33,6 +33,7 @@ footer {
     padding-left: 10px;
     padding-top: 10px;
     z-index: 99;
+    background-color: rgb(245, 248, 255);
 }
 
 h1 {
@@ -47,7 +48,7 @@ article {
 
 p {
     text-indent: 1rem;
-    margin-top: 2px;
+    margin-top: 8px;
 }
 
 h2 {
@@ -61,8 +62,16 @@ h2 {
     border-width: 3px 0px 3px 0px;
 }
 
+h3 {
+    margin-top: 1rem;
+    border-style: solid;
+    border-color: rgb(0, 34, 107);
+    border-left-width: 5px;
+}
+
 ul {
     list-style-type: disc;
+    margin-top: 10px;
     padding-left: 30px;
 }
 
