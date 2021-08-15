@@ -45,15 +45,20 @@ namespace PersonalNewsSiteSupportTool.Models
         /// <summary>
         /// 設定読込メソッド。
         /// </summary>
-        public static void ReloadConfig()
+        /// <returns>初期設定要フラグ</returns>
+        public static bool ReloadConfig()
         {
+            bool ret = false;
             // 起動時のログ出力で必ずフォルダが作成されているのでフォルダの存在判定は行わない。
             if (!File.Exists(configPath))
             {
                 File.Copy(defaultConfigPath, configPath);
+                ret = true;
             }
             string json = File.ReadAllText(configPath, System.Text.Encoding.UTF8);
             Config = JsonSerializer.Deserialize<Config>(json, options);
+
+            return ret;
         }
 
         /// <summary>

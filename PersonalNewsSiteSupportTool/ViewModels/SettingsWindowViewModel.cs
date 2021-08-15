@@ -27,6 +27,25 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         private Config beforeConfig;
 
         /// <summary>
+        /// 初期化フラグ
+        /// 設定ウィンドウが初期化モードで開かれたかどうか。
+        /// 初回設定時に入力必須チェックを迂回するのに使用。
+        /// ウィンドウがロードされたらfalseにする。
+        /// </summary>
+        private bool isInit;
+
+        /// <summary>
+        /// ウィンドウをクローズする際にチェックを行うかどうか。
+        /// 初回設定時に未保存でウィンドウを閉じるのを防ぐ。
+        /// </summary>
+        private bool isCloseCheck;
+
+        /// <summary>
+        /// 保存有無
+        /// </summary>
+        private bool isSaved;
+
+        /// <summary>
         /// 監視文言
         /// </summary>
         private string watchWord;
@@ -38,7 +57,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         {
             get => watchWord;
             set {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value) && !isInit)
                 {
                     ShowErrorMessage("監視する単語は入力必須です。");
                 }
@@ -71,7 +90,13 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public string SavePath
         {
             get => savePath;
-            set => RaisePropertyChangedIfSet(ref savePath, value);
+            set
+            {
+                if (string.IsNullOrEmpty(value) && !isInit)
+                {
+                    RaisePropertyChangedIfSet(ref savePath, value);
+                }
+            }
         }
 
         /// <summary>
@@ -264,21 +289,38 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         public ObservableCollection<NewLineItem> NewLines { get; set; }
 
         /// <summary>
-        /// 親ウィンドウ
+        /// 親ウィンドウVM
         /// </summary>
         private readonly MainWindowModel mainWindow;
+
+        /// <summary>
+        /// 設定ウィンドウを閉じれるかどうか。
+        /// </summary>
+        public bool CanClose 
+        {
+            get
+            {
+                if (isCloseCheck)
+                {
+                    return isSaved;
+                }
+                return true;
+            }
+        }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="viewModel">親ウィンドウ</param>
-        private SettingsWindowViewModel(MainWindowModel viewModel)
+        private SettingsWindowViewModel(MainWindowModel viewModel, bool isInit = false)
         {
             mainWindow = viewModel;
             // コマンドの設定
             SaveCommand = new ViewModelCommand(SaveDo);
             CancelCommand = new ViewModelCommand(Cancel);
             PreviewCommand = new ViewModelCommand(Preview);
+            this.isInit = isInit;
+            this.isCloseCheck = isInit;
         }
 
         /// <summary>
@@ -289,13 +331,17 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <summary>
         /// インスタンス取得
         /// </summary>
-        /// <param name="viewModel">親ウィンドウ</param>
+        /// <param name="viewModel">親ウィンドウVM</param>
         /// <returns>インスタンス</returns>
-        public static SettingsWindowViewModel GetInstance(MainWindowModel viewModel)
+        public static SettingsWindowViewModel GetInstance(MainWindowModel viewModel, bool isInit = false)
         {
             if(instance == null)
             {
-                instance = new SettingsWindowViewModel(viewModel);
+                instance = new SettingsWindowViewModel(viewModel, isInit);
+            }
+            else
+            {
+                instance.isInit = isInit;
             }
             return instance;
         }
@@ -344,6 +390,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 this.ViaList.Add(new Via() { Name = kvp.Value, Data = kvp.Key });
             }
             this.NotifyPropertyChanged(nameof(ViaList));
+            isInit = false;
+            isSaved = false;
         }
 
         /// <summary>
@@ -372,6 +420,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
                 ConfigManager.SaveConfig();
                 mainWindow.ConfigLoad();
             }
+            isSaved = true;
+            this.NotifyPropertyChanged("CanClose");
             Messenger.Raise(new WindowActionMessage(WindowAction.Close, "Close"));
         }
 
