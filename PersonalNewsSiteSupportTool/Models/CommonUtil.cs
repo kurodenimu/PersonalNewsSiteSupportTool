@@ -10,7 +10,7 @@ namespace PersonalNewsSiteSupportTool.Models
     /// <summary>
     /// 共通ユーティリティ。メソッドが増えるときはクラスの分割を検討すること。
     /// </summary>
-    static class CommonUtil
+    public static class CommonUtil
     {
         /// <summary>
         /// 改行コードの正規表現オブジェクト
