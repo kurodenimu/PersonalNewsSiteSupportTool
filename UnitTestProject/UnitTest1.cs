@@ -12,7 +12,7 @@ namespace UnitTestProject
     [TestClass]
     public class UnitTest1
     {
-
+        /*
         private Process process;
         private WindowsAppFriend app;
         private MainWindowTestDriver driver;
@@ -70,6 +70,6 @@ namespace UnitTestProject
 
 
         }
-
+        */
     }
 }
