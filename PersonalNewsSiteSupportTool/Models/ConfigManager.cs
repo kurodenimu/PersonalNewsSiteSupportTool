@@ -18,12 +18,12 @@ namespace PersonalNewsSiteSupportTool.Models
         /// <summary>
         /// デフォルトの設定ファイルパス。
         /// </summary>
-        private static readonly string defaultConfigPath = PathConstant.APP_PATH + @"\config.json";
+        private static readonly string defaultConfigPath = PathManager.GetAppPath() + @"\default.json";
 
         /// <summary>
         /// ユーザの設定ファイルパス。
         /// </summary>
-        private static readonly string configPath = PathConstant.APP_DATA_PATH + @"\config.json";
+        private static readonly string configPath = PathManager.GetAppDataPath() + @"\config.json";
 
         /// <summary>
         /// 設定ファイルを読書きする際のオプション。

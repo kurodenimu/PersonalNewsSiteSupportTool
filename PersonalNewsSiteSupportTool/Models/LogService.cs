@@ -17,7 +17,7 @@ namespace PersonalNewsSiteSupportTool.Models
         /// <summary>
         /// ログの出力先。
         /// </summary>
-        private static readonly string logPath = PathConstant.APP_DATA_PATH + @"\logs";
+        private static readonly string logPath = PathManager.GetAppDataPath() + @"\logs";
 
         /// <summary>
         /// 初期化フラグ。
