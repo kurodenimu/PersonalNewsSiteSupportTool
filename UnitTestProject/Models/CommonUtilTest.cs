@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PersonalNewsSiteSupportTool.Models;
 
-namespace UnitTestProject
+namespace UnitTestProject.Models
 {
     [TestClass]
     public class CommonUtilTest : TestBase
@@ -9,7 +9,7 @@ namespace UnitTestProject
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ClassInit();
+            ClassInit(testContext);
         }
 
         [ClassCleanup()]
