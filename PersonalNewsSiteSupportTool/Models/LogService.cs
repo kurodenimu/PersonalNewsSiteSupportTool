@@ -1,4 +1,5 @@
 ﻿using NLog;
+using NLog.Targets;
 using System;
 using System.IO;
 
@@ -17,7 +18,7 @@ namespace PersonalNewsSiteSupportTool.Models
         /// <summary>
         /// ログの出力先。
         /// </summary>
-        private static readonly string logPath = PathManager.GetAppDataPath() + @"\logs";
+        private static readonly string logPath = PathManager.AppDataPath + @"\logs";
 
         /// <summary>
         /// 初期化フラグ。
@@ -49,10 +50,15 @@ namespace PersonalNewsSiteSupportTool.Models
                 {
                     Directory.CreateDirectory(logPath);
                 }
+                SetFileName("errorLog");
                 if (!isDebug)
                 {
                     var config = LogManager.Configuration;
                     config.RemoveTarget("debugLog");
+                }
+                else
+                {
+                    SetFileName("debugLog");
                 }
                 logger.Info("Start app.");
                 LogManager.Flush();
@@ -67,6 +73,18 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             logger.Info("End App.");
             LogManager.Flush();
+        }
+
+        /// <summary>
+        /// NLogの出力ファイル名を完全パスにする。
+        /// </summary>
+        /// <param name="targetName"></param>
+        private static void SetFileName(string targetName)
+        {
+            var config = LogManager.Configuration;
+            var target = config.FindTargetByName<FileTarget>(targetName);
+            string filename = target.FileName.ToString();
+            target.FileName = logPath + filename.Trim('\'');
         }
 
         /// <summary>

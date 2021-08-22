@@ -70,11 +70,6 @@
     <Compile Include="Models\ClipboardWrapper.cs" />
     <Compile Include="Models\CommonUtil.cs" />
     <Compile Include="Models\PathManager.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\OutTextPreviewViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
     <Compile Include="ViewModels\Via.cs" />
@@ -135,10 +130,6 @@
     </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

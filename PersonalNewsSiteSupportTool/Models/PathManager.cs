@@ -18,18 +18,8 @@ namespace PersonalNewsSiteSupportTool.Models
         /// </summary>
         private static readonly string APP_PATH = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
 
-        public static string GetAppDataPath()
-        {
-            var settings = new Settings();
-            if(settings.UseUserPath)
-            {
-                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\PersonalNewsSiteSupportTool";
-            }
-            else
-            {
-                return APP_PATH;
-            }
-        }
+        public static string AppDataPath { get; private set; } = 
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\PersonalNewsSiteSupportTool";
 
         public static string GetAppPath()
         {
