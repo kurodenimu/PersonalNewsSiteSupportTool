@@ -21,4 +21,4 @@ jobs:
           nuget restore UnittestProject\UnittestProject.csproj
 
       - run: msbuild
-      - run: dotnet test
+      - run: dotnet test --no-restore --no-build
