@@ -4,8 +4,19 @@ using PersonalNewsSiteSupportTool.Models;
 namespace UnitTestProject
 {
     [TestClass]
-    public class CommonUtilTest
+    public class CommonUtilTest : TestBase
     {
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            ClassInit();
+        }
+
+        [ClassCleanup()]
+        public static void MyClassCleanup()
+        {
+            ClassClean();
+        }
         [TestMethod]
         public void TestGetOutText()
         {
@@ -16,8 +27,7 @@ namespace UnitTestProject
                 ViaPrefix = "（via：",
                 ViaSuffix = "）"
             };
-            var privateType = new PrivateType(typeof(ConfigManager));
-            privateType.SetStaticFieldOrProperty("Config", config);
+            SetConfig(config);
 
             // ファイルから読み込んだ設定で呼び出すケース
             Assert.AreEqual("url\n（via：via）\ncomment\n\n", CommonUtil.GetOutText("url", "via", "comment"));
