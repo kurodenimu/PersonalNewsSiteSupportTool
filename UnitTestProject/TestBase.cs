@@ -101,7 +101,7 @@ namespace UnitTestProject
             }
         }
 
-        protected void AssertFile(string expFilePath, string actFilePath, string msg = "")
+        protected static void AssertFile(string expFilePath, string actFilePath, string msg = "")
         {
             CollectionAssert.AreEqual(System.IO.File.ReadAllBytes(expFilePath), System.IO.File.ReadAllBytes(actFilePath), msg);
         }
