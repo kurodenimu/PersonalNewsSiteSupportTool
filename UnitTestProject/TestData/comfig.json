@@ -1,6 +1,7 @@
 {
   "Version": "1.0",
   "WatchWord": "☆",
+  "IsRemoveWatchWord": true,
   "SavePath": "",
   "OutFilePrefix": "news_",
   "OutFileSuffix": ".txt",
