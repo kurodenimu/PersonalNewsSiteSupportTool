@@ -8,7 +8,7 @@ namespace PersonalNewsSiteSupportTool.Models
     /// <summary>
     /// 設定管理クラス
     /// </summary>
-    public sealed class ConfigManager
+    public static class ConfigManager
     {
         /// <summary>
         /// アプリの現在の設定を保持する。
@@ -23,7 +23,7 @@ namespace PersonalNewsSiteSupportTool.Models
         /// <summary>
         /// ユーザの設定ファイルパス。
         /// </summary>
-        private static readonly string configPath = PathManager.GetAppDataPath() + @"\config.json";
+        private static readonly string configPath = PathManager.AppDataPath + @"\config.json";
 
         /// <summary>
         /// 設定ファイルを読書きする際のオプション。
@@ -33,14 +33,6 @@ namespace PersonalNewsSiteSupportTool.Models
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All),
             WriteIndented = true
         };
-
-        /// <summary>
-        /// コンストラクタ（非公開）
-        /// </summary>
-        private ConfigManager()
-        {
-            
-        }
 
         /// <summary>
         /// 設定読込メソッド。
