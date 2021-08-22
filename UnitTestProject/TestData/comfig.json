@@ -1,0 +1,24 @@
+{
+  "Version": "1.0",
+  "WatchWord": "☆",
+  "SavePath": "",
+  "OutFilePrefix": "news_",
+  "OutFileSuffix": ".txt",
+  "NewLine": "\n",
+  "CategoryPrefix": "**",
+  "CategorySuffix": "",
+  "ViaPrefix": "（via：",
+  "ViaSuffix": "）",
+  "Categories": [
+  ],
+  "ViaList": [
+    {
+      "Key": "はてなブックマーク",
+      "Value": "はてなブックマーク"
+    },
+    {
+      "Key": "Twitter",
+      "Value": "Twitter"
+    }
+  ]
+}

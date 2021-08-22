@@ -1,0 +1,24 @@
+{
+  "Version": "1.0",
+  "WatchWord": "1",
+  "SavePath": "2",
+  "OutFilePrefix": "3",
+  "OutFileSuffix": "4",
+  "NewLine": "5",
+  "CategoryPrefix": "6",
+  "CategorySuffix": "7",
+  "ViaPrefix": "8",
+  "ViaSuffix": "9",
+  "Categories": [
+    {
+      "Key": "Category1",
+      "Value": "カテゴリー１"
+    }
+  ],
+  "ViaList": [
+    {
+      "Key": "Via1",
+      "Value": "情報元１"
+    }
+  ]
+}
