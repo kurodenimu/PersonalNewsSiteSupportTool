@@ -14,7 +14,7 @@ namespace UnitTestProject
 
         protected const string TEST_CONFIG_PATH = @"..\..\TestData\comfig.json";
 
-        protected static void ClassInit()
+        protected static void ClassInit(TestContext testContext)
         {
             // アプリケーションデータパスを書換え
             var pathManager = new PrivateType(typeof(PathManager));

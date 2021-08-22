@@ -49,7 +49,7 @@ namespace UnitTestProject
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ClassInit();
+            ClassInit(testContext);
         }
         //
         // クラス内のテストをすべて実行したら、ClassCleanup を使用してコードを実行してください
