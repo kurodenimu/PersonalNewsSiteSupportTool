@@ -50,11 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonUtilTest.cs" />
+    <Compile Include="ConfigManagerTest.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="TestData\loadtest.json" />
+    <None Include="TestData\comfig.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PersonalNewsSiteSupportTool\PersonalNewsSiteSupportTool.csproj">
@@ -90,6 +95,9 @@
     <PackageReference Include="RM.Friendly.WPFStandardControls">
       <Version>1.51.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ResultData\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
