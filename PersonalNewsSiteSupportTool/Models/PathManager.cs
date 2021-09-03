@@ -25,5 +25,17 @@ namespace PersonalNewsSiteSupportTool.Models
         {
             return APP_PATH;
         }
+
+        public static string GetFullPath(string folder, string filename)
+        {
+            if (folder.EndsWith("\\"))
+            {
+                return folder + filename;
+            }
+            else
+            {
+                return folder + "\\" + filename;
+            }
+        }
     }
 }
