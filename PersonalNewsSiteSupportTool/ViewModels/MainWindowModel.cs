@@ -339,7 +339,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         {
             try
             {
-                File.AppendAllText($"{folder}{fileName}", outText);
+                File.AppendAllText(PathManager.GetFullPath(folder, fileName), outText);
             }
             catch (PathTooLongException e)
             {
@@ -377,7 +377,8 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <returns>出力の成否</returns>
         private bool OverwriteTextFile(string folder, string fileName, string outText)
         {
-            if (File.Exists($"{folder}{fileName}"))
+            string fullPath = PathManager.GetFullPath(folder, fileName);
+            if (File.Exists(fullPath))
             {
                 if (!ShowConfirmMessage("出力先にファイルがありますが上書きしますか？"))
                 {
@@ -386,11 +387,11 @@ namespace PersonalNewsSiteSupportTool.ViewModels
             }
             try
             {
-                File.WriteAllText($"{folder}{fileName}", outText);
+                File.WriteAllText(fullPath, outText);
             }
             catch (PathTooLongException e)
             {
-                ShowErrorMessage($"出力先のファイルパスが長すぎます。\n{folder}{fileName}");
+                ShowErrorMessage($"出力先のファイルパスが長すぎます。\n{fullPath}");
                 LogService.DumpException(e);
                 return false;
             }
