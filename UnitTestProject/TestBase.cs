@@ -14,7 +14,7 @@ namespace UnitTestProject
 
         protected const string TEST_CONFIG_PATH = @"..\..\TestData\comfig.json";
 
-        protected static void ClassInit()
+        protected static void ClassInit(TestContext testContext)
         {
             // アプリケーションデータパスを書換え
             var pathManager = new PrivateType(typeof(PathManager));
@@ -101,7 +101,7 @@ namespace UnitTestProject
             }
         }
 
-        protected void AssertFile(string expFilePath, string actFilePath, string msg = "")
+        protected static void AssertFile(string expFilePath, string actFilePath, string msg = "")
         {
             CollectionAssert.AreEqual(System.IO.File.ReadAllBytes(expFilePath), System.IO.File.ReadAllBytes(actFilePath), msg);
         }

@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace UnitTestProject
+namespace UnitTestProject.Models
 {
     [TestClass]
     public class ConfigManagerTest :TestBase
@@ -12,7 +12,7 @@ namespace UnitTestProject
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ClassInit();
+            ClassInit(testContext);
         }
 
         [ClassCleanup()]
