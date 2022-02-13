@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_05D18EFC3A5849E48C6F0850CA6F6605"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_06BF5978553B4EBFB92A3163FC71743F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -167,6 +161,12 @@
         {
         "MsmKey" = "8:_5A0BB4203D6A806CDDE662313495F41E"
         "OwnerKey" = "8:_77DA1796B45348BBB2C3A5ED1EE25EE8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5F80BA8C3AAC4FB282EF396751717710"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -720,26 +720,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_05D18EFC3A5849E48C6F0850CA6F6605"
-            {
-            "SourcePath" = "8:..\\PersonalNewsSiteSupportTool\\config.json"
-            "TargetName" = "8:config.json"
-            "Tag" = "8:"
-            "Folder" = "8:_CB98E11120594EEB9E6716245FEDC9F5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_06BF5978553B4EBFB92A3163FC71743F"
             {
             "SourcePath" = "8:..\\PersonalNewsSiteSupportTool\\LICENSES\\NLog_LICENSE.txt"
@@ -809,11 +789,11 @@
                 {
                     "_0D250251B0624D5FE77CC9A582003BFB"
                     {
-                    "Name" = "8:System.Buffers.DLL"
+                    "Name" = "8:System.Buffers.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Buffers.DLL"
+            "SourcePath" = "8:System.Buffers.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -984,11 +964,11 @@
                 {
                     "_3362AFAC520AB7B97CC67B48A07E38AF"
                     {
-                    "Name" = "8:Livet.Messaging.DLL"
+                    "Name" = "8:Livet.Messaging.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Livet.Messaging.DLL"
+            "SourcePath" = "8:Livet.Messaging.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1046,11 +1026,11 @@
                 {
                     "_415D3DEFA56414E95254CBCBDFD13C80"
                     {
-                    "Name" = "8:System.Numerics.Vectors.DLL"
+                    "Name" = "8:System.Numerics.Vectors.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Numerics.Vectors.DLL"
+            "SourcePath" = "8:System.Numerics.Vectors.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1108,11 +1088,11 @@
                 {
                     "_5A0BB4203D6A806CDDE662313495F41E"
                     {
-                    "Name" = "8:Livet.Core.DLL"
+                    "Name" = "8:Livet.Core.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Livet.Core.DLL"
+            "SourcePath" = "8:Livet.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1130,6 +1110,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F80BA8C3AAC4FB282EF396751717710"
+            {
+            "SourcePath" = "8:..\\PersonalNewsSiteSupportTool\\default.json"
+            "TargetName" = "8:default.json"
+            "Tag" = "8:"
+            "Folder" = "8:_CB98E11120594EEB9E6716245FEDC9F5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_63AEE7D15AFF3151278D9FC4BAB25AFC"
             {
             "AssemblyRegister" = "3:1"
@@ -1139,11 +1139,11 @@
                 {
                     "_63AEE7D15AFF3151278D9FC4BAB25AFC"
                     {
-                    "Name" = "8:System.Runtime.CompilerServices.Unsafe.DLL"
+                    "Name" = "8:System.Runtime.CompilerServices.Unsafe.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Runtime.CompilerServices.Unsafe.DLL"
+            "SourcePath" = "8:System.Runtime.CompilerServices.Unsafe.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1170,11 +1170,11 @@
                 {
                     "_6915582954CE7E90E600BDA4CAF0C971"
                     {
-                    "Name" = "8:Microsoft.Xaml.Behaviors.DLL"
+                    "Name" = "8:Microsoft.Xaml.Behaviors.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Xaml.Behaviors.DLL"
+            "SourcePath" = "8:Microsoft.Xaml.Behaviors.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1263,11 +1263,11 @@
                 {
                     "_73538A0DDBC94B1E22ED6BE593A6E9A1"
                     {
-                    "Name" = "8:System.Memory.DLL"
+                    "Name" = "8:System.Memory.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Memory.DLL"
+            "SourcePath" = "8:System.Memory.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1478,11 +1478,11 @@
                 {
                     "_A83DE20A134A9569D1CD5D141DAA9343"
                     {
-                    "Name" = "8:Livet.EventListeners.DLL"
+                    "Name" = "8:Livet.EventListeners.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Livet.EventListeners.DLL"
+            "SourcePath" = "8:Livet.EventListeners.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1777,11 +1777,11 @@
                 {
                     "_E7E66F20A42DE38F3187C8FC70A4FCBF"
                     {
-                    "Name" = "8:Microsoft.Bcl.AsyncInterfaces.DLL"
+                    "Name" = "8:Microsoft.Bcl.AsyncInterfaces.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Bcl.AsyncInterfaces.DLL"
+            "SourcePath" = "8:Microsoft.Bcl.AsyncInterfaces.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1839,11 +1839,11 @@
                 {
                     "_F10179A0CF90AA37935DABC305A4928A"
                     {
-                    "Name" = "8:System.Text.Encodings.Web.DLL"
+                    "Name" = "8:System.Text.Encodings.Web.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Text.Encodings.Web.DLL"
+            "SourcePath" = "8:System.Text.Encodings.Web.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1901,11 +1901,11 @@
                 {
                     "_FC1C7B56E79DA07BC73D149522173B35"
                     {
-                    "Name" = "8:System.Threading.Tasks.Extensions.DLL"
+                    "Name" = "8:System.Threading.Tasks.Extensions.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.Threading.Tasks.Extensions.DLL"
+            "SourcePath" = "8:System.Threading.Tasks.Extensions.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -1932,11 +1932,11 @@
                 {
                     "_FDFE968A2529E66D2CB4602B7C8DF690"
                     {
-                    "Name" = "8:System.ValueTuple.DLL"
+                    "Name" = "8:System.ValueTuple.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.ValueTuple.DLL"
+            "SourcePath" = "8:System.ValueTuple.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_30CAB6F66DB44D55830B6F8C1953B8FF"
@@ -2044,7 +2044,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PersonalNewsSiteSupportTool"
         "ProductCode" = "8:{69445ADC-D141-4873-AD7B-85B5733E38C5}"
-        "PackageCode" = "8:{774770D8-D2E2-4008-9C8C-B84603AEB834}"
+        "PackageCode" = "8:{F42A234B-44C5-4FDE-8C75-C3C9BD4BE368}"
         "UpgradeCode" = "8:{1E9D01D1-4D72-43BD-92BF-4AE0FD76419F}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -2166,16 +2166,16 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_26C453F54E6A41ADAA03DC373AB5BC37"
             {
-            "Name" = "8:Shortcut to PersonalNewsSiteSupportTool"
+            "Name" = "8:PersonalNewsSiteSupportTool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_F21D5BC3402A4C52A617A7441767A011"
             "Folder" = "8:_C33AAC6E959F4CBBA8422A594C3FA739"
             "WorkingFolder" = "8:_CB98E11120594EEB9E6716245FEDC9F5"
-            "Icon" = "8:"
+            "Icon" = "8:_F21D5BC3402A4C52A617A7441767A011"
             "Feature" = "8:"
             }
         }
