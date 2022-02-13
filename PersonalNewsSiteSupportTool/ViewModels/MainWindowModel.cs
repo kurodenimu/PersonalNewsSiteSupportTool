@@ -339,7 +339,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         {
             try
             {
-                File.AppendAllText(PathManager.GetFullPath(folder, fileName), outText);
+                File.AppendAllText(Path.Combine(folder, fileName), outText);
             }
             catch (PathTooLongException e)
             {
@@ -377,7 +377,7 @@ namespace PersonalNewsSiteSupportTool.ViewModels
         /// <returns>出力の成否</returns>
         private bool OverwriteTextFile(string folder, string fileName, string outText)
         {
-            string fullPath = PathManager.GetFullPath(folder, fileName);
+            string fullPath = Path.Combine(folder, fileName);
             if (File.Exists(fullPath))
             {
                 if (!ShowConfirmMessage("出力先にファイルがありますが上書きしますか？"))
